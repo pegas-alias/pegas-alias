@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { Intro, FormField, Button } from '../../components';
 import { errorToString, pattern } from '../../utils';
 
+import './../../scss/form/form.scss';
+
 export const SignUp: React.FC = (): JSX.Element => {
 	const { email, login, name, phone, password } = pattern();
 

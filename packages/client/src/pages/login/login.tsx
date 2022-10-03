@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { FormField, Button, Intro } from '../../components';
 import { errorToString, pattern } from '../../utils';
 
-import './../../components/form/form.scss';
+import './../../scss/form/form.scss';
 
 export const Login: React.FC = (): JSX.Element => {
 
