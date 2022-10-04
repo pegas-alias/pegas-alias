@@ -5,6 +5,7 @@ import { Main } from './pages/main';
 import { Login } from './pages/login/login';
 import { SignUp } from './pages/sign-up/sign-up';
 import { Profile } from './pages/profile/profile';
+import { ChangePassword } from './pages/change-password/change-password';
 
 import './scss/style.scss';
 
@@ -28,6 +29,7 @@ export function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/change-password" element={<ChangePassword />} />
       </Routes>
     </Router>
   </div>

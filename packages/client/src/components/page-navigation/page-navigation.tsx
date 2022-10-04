@@ -27,6 +27,9 @@ function PageNavigation() {
         <li className="page-navigation__item">
           <Link className="page-navigation__link" to="/profile">Профиль</Link>
         </li>
+        <li className="page-navigation__item">
+          <Link className="page-navigation__link" to="/change-password">Смена пароля</Link>
+        </li>
       </ul>
       <svg className="page-navigation__close"
         onClick={hideMenu}

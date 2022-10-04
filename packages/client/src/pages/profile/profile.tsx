@@ -117,8 +117,6 @@ export const Profile: React.FC = (): JSX.Element => {
             errorText={errorToString(errors?.phone)}
           />
 
-
-
         </div>
 
         <div className="form__buttons">
@@ -131,7 +129,7 @@ export const Profile: React.FC = (): JSX.Element => {
             type='button'
             text="Изменить пароль"
             events={{
-              onClick: () => navigate('/sign-up')
+              onClick: () => navigate('/change-password')
             }}
           />
           <Button
