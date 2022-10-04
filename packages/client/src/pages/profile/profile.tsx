@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
 import { FormField, Button, Intro } from '../../components';
+import { Avatar } from '../../components/avatar/avatar';
 import { errorToString, pattern } from '../../utils';
 
 import './../../scss/form/form.scss';
@@ -27,7 +28,7 @@ export const Profile: React.FC = (): JSX.Element => {
 
   return (
     <main>
-      <Intro small />
+      <Avatar />
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
         <h2 className="form__title">Валентина Космодемьянская</h2>
 
@@ -90,6 +91,18 @@ export const Profile: React.FC = (): JSX.Element => {
             })}
             placeholder="Имя"
             errorText={errorToString(errors?.first_name)}
+          />
+
+          <FormField
+            register={register('second_name', {
+              required: 'Заполните поле',
+              pattern: {
+                value: name,
+                message: 'Некорректно введено фамилия'
+              }
+            })}
+            placeholder="Фамилия"
+            errorText={errorToString(errors?.second_name)}
           />
 
           <FormField
