@@ -2,10 +2,12 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import { FormField, Button, Intro } from '../../components';
-import { errorToString, pattern } from '../../utils';
+import { FormField, Button, Intro } from '../components';
+import { errorToString, pattern } from '../utils';
 
-import './../../scss/form/form.scss';
+
+import '../components/form/form.scss';
+
 
 export const Login: React.FC = (): JSX.Element => {
 
