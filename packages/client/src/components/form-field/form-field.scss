@@ -20,7 +20,7 @@
 
   &.form-field--error {
     .field {
-      outline: 1px solid $alert;
+      border: 1px solid $alert;
     }
 
     .form-field__info {
