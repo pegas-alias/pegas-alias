@@ -8,6 +8,7 @@ interface IFormField {
   errorText?: string ;
   placeholder?: string;
   type?: string;
+  value?:string;
 }
 
 export function FormField(props: IFormField) {

@@ -3,8 +3,8 @@
  * TODO: Удалить после реализации вёрстки всех экранов
  */
 
-import {Link} from 'react-router-dom'
 import React from 'react';
+import {Link} from 'react-router-dom'
 import './page-navigation.scss';
 
 function PageNavigation() {
@@ -29,9 +29,6 @@ function PageNavigation() {
         </li>
         <li className="page-navigation__item">
           <Link className="page-navigation__link" to="/change-password">Смена пароля</Link>
-        </li>
-        <li className="page-navigation__item">
-          <Link className="page-navigation__link" to="/forum">Форум</Link>
         </li>
         <li className="page-navigation__item">
           <Link className="page-navigation__link" to="/forum">Форум</Link>

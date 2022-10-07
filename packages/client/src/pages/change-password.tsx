@@ -2,10 +2,10 @@ import React, { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import { FormField, Button, Avatar } from '../../components';
-import { errorToString, pattern } from '../../utils';
+import { FormField, Button, Avatar } from '../components';
+import { errorToString, pattern } from '../utils';
 
-import './../../scss/form/form.scss';
+import './../scss/form/form.scss';
 
 export const ChangePassword: React.FC = (): JSX.Element => {
 
