@@ -31,6 +31,9 @@ function PageNavigation() {
           <Link className="page-navigation__link" to="/change-password">Смена пароля</Link>
         </li>
         <li className="page-navigation__item">
+          <Link className="page-navigation__link" to="/rules">Правила</Link>
+        </li>
+        <li className="page-navigation__item">
           <Link className="page-navigation__link" to="/forum">Форум</Link>
         </li>
         <li className="page-navigation__item">
