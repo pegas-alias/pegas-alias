@@ -1,9 +1,9 @@
-import React from 'react';
 import { UseFormRegisterReturn } from 'react-hook-form';
 import './field.scss';
 
-interface IField {
-	register: UseFormRegisterReturn<string>;
+
+export interface IField {
+	register?: UseFormRegisterReturn<string>;
 	type?: string;
 	placeholder?: string;
 	value?:string

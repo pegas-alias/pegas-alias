@@ -1,48 +1,131 @@
+// .modal{
+//   position: fixed;
+//   height: 100vh;
+//   width: 100vw;
+//   top: 0;
+//   left: 0;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   z-index: 2;
+// }
 
-.modal{
+// .modal-mask{
+//     position: absolute;
+//     width: 100vw;
+//     height: 100vh;
+//     background: #212B799C;
+//   }
+  
+//   .modal-view{
+//     background: #CCD6FE;
+//     z-index: 2;
+//     width: 100%;
+//     max-width: 420px;
+//     min-height: 300px;
+//     height: auto;
+//     border-radius: 12px;
+//     position: relative;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     justify-content: center;
+//     padding: 41px 50px 37px 50px
+//   }
+  
+//   .modal-view-close{
+//     position: absolute;
+//     top:15px;
+//     right: 15px;
+//     height: 14px;
+//     width: 14px;
+//     cursor: pointer;
+//   }
+
+//   .mb-28{
+//     margin-bottom: 28px;
+//   }
+
+@import "./../../scss/base/variables";
+
+.modal {
   position: fixed;
-  height: 100vh;
-  width: 100vw;
-  top: 0;
   left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
-  align-items: center;
   justify-content: center;
-  z-index: 2;
+  align-items: center;
+  z-index: -1;
+  
+  &--open {
+    z-index: 2;
+    
+    .modal__overlay {
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal__body {
+      transform: none;
+      opacity: 1;
+      visibility: visible;
+    }
+  }
 }
 
-.modal-mask{
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    background: #212B799C;
-  }
-  
-  .modal-view{
-    background: #CCD6FE;
-    z-index: 2;
-    width: 100%;
-    max-width: 420px;
-    min-height: 300px;
-    height: auto;
-    border-radius: 12px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 41px 50px 37px 50px
-  }
-  
-  .modal-view-close{
-    position: absolute;
-    top:15px;
-    right: 15px;
-    height: 14px;
-    width: 14px;
-    cursor: pointer;
-  }
+.modal__overlay {
+  background: rgba(33, 43, 121, 0.6);
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s;
+}
 
-  .mb-28{
-    margin-bottom: 28px;
+.modal__body {
+  width: 90%;
+  max-width: 420px;
+  padding: 40px;
+  background: $accent-background;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+  border-radius: 12px;
+  position: relative;
+  transform: translateY(-15px);
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s;
+}
+
+.modal__title {
+  margin-bottom: 25px;
+}
+
+.modal__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: url('./src/assets/images/cross-icon.svg') center / 24px no-repeat;
+  width: 24px;
+  height: 24px;
+  display: block;
+  cursor: pointer;
+  transition: 0.3s;
+  
+  &:hover {
+    opacity: .7;
   }
+}
+
+.modal__form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 28px;
+}
