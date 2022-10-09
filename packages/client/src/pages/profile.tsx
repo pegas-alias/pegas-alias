@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
 import { getUser } from '../services/store/userSlice';
-import { FormField, Button, Avatar } from '../components';
+import { FormField, Button, Avatar } from './../components';
 
 import { changeProfileAPI, getUserAPI } from '../services/http/profile';
 import { errorToString, pattern } from '../utils';
