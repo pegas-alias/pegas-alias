@@ -4,7 +4,6 @@ import { Button, BackLink } from '../components';
 import './../scss/form/form.scss';
 import './../components/round/round.scss';
 
-
 export const Round: React.FC = (): JSX.Element => {
   const currPlayer = 1;
   const scoreLimit = 100;
