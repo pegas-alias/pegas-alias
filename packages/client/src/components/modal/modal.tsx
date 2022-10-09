@@ -1,19 +1,26 @@
 import { ReactNode } from 'react';
-import closeImg from './../../assets/images/close.svg';
+
 import './modal.scss';
-interface IMofal {
-    children: ReactNode;
-    close: () => void;
+
+interface IModal {
+  children: ReactNode;
+  isOpen: boolean;
+  close: () => void;
 }
 
-export const Modal: React.FC<IMofal> = ({ children, close }: IMofal): JSX.Element => {
-    return (
-        <div className="modal">
-            <div className="modal-mask"></div>
-            <div className="modal-view">
-                <img className="modal-view-close" onClick={close} src={closeImg} alt="" />
-                {children}
-            </div>
+export const Modal: React.FC<IModal> = ({ children, isOpen, close }: IModal): JSX.Element => {
+  return (
+    <>
+      {
+        isOpen &&
+        <div className="modal modal--open">
+          <div className="modal__overlay" onClick={close}></div>
+          <div className="modal__body">
+            <span className="modal__close" onClick={close} />
+            {children}
+          </div>
         </div>
-    )
+      }
+    </>
+  )
 }

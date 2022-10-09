@@ -38,6 +38,7 @@
 
 .form__fields--center {
   align-items: center;
+}
 
 .flat-field {
   display: flex;
@@ -56,12 +57,14 @@
   box-sizing: border-box;
   margin-top: 24px;
 }
+
 .flat-field--noborder {
   height: 24px;
   border-top: none;
   border-bottom: none;
   margin-top: 0px;
 }
+
 .flat-field span {
   padding: 0px 6px;
 }

@@ -15,6 +15,8 @@ export * from './not-found/not-found'
 export * from './winner/winner'
 export * from './timer-line/timer-line';
 export * from './score-in-round/score-in-round'
+export * from './modal/add-forum-modal'
+export * from './modal/edit-avatar-modal'
 
 // Modals
 export * from './modal/add-forum-modal'
