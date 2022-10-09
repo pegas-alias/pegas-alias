@@ -1,31 +1,25 @@
-import axios from 'axios';
-
-const apiUrl = 'https://ya-praktikum.tech/api/v2';
+import { instanse } from './axios';
 
 export const registerUser = (data: any) => {
-    axios.post(apiUrl + '/auth/signup', data, {
-        headers: {
-            'Content-Type': 'application/json; charset=utf-8'
-        }
-    })
+  instanse.post('/auth/signup', data)
     .then(response => {
-        console.log(response);
+      console.log(response);
     })
     .catch(error => {
-        console.log(error);
+      console.log(error);
     })
 }
 
 export const loginUser = (data: any) => {
-    axios.post(apiUrl + '/auth/signin', data, {
-        headers: {
-            'Content-Type': 'application/json; charset=utf-8'
-        }
-    })
+  instanse.post('/auth/signin', data)
     .then(response => {
-        console.log(response);
+      console.log(response);
     })
     .catch(error => {
-        console.log(error);
+      console.log(error);
     })
+}
+
+export const logoutUser = () => {
+  instanse.post('/auth/logout');
 }

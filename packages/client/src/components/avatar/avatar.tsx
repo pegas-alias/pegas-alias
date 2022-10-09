@@ -1,19 +1,10 @@
 import React, { useRef, useState } from "react";
+import { useToggle } from "../../services/hooks";
 import { Modal, Button } from "../index";
 
 import './avatar.scss';
 import logo from './../../assets/images/logo-round-shadow.png';
 import editIcon from './../../assets/images/Edit.svg';
-
-const useToggle = (initialValue: boolean = false): [boolean, () => void] => {
-    const [value, setValue] = useState<boolean>(initialValue);
-
-    function toggleValue(): void {
-        setValue(previousValue => !previousValue);
-    }
-
-    return [value, toggleValue];
-}
 
 export const Avatar: React.FC = (): JSX.Element => {
 

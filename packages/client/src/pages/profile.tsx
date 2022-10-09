@@ -1,53 +1,68 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import { FormField, Button, Intro } from '../components';
-import { Avatar } from '../components/avatar/avatar';
+import { getUser } from '../services/store/userSlice';
+import { FormField, Button, Avatar } from '../components';
+
+import { changeProfileAPI, getUserAPI } from '../services/http/profile';
 import { errorToString, pattern } from '../utils';
 
 import './../scss/form/form.scss';
 
-export const Profile: React.FC = (): JSX.Element => {
 
+
+export const Profile: React.FC = (): JSX.Element => {
   const { email, login, name, phone } = pattern();
+  const dispatch = useDispatch();
+  const user = useSelector((state: any) => state.user.user);
 
   const {
     register,
     formState: {
       errors
     },
-    handleSubmit
-  } = useForm({ mode: 'onBlur' });
+    reset,
+    handleSubmit,
+  } = useForm({
+    defaultValues: user,
+    mode: 'onBlur'
+  });
+
+  useEffect(() => {
+    reset(user);
+  }, [user])
 
   const navigate = useNavigate();
 
   const onSubmit = (data: Record<string, unknown>) => {
-    console.log(data)
+    changeProfileAPI(data).then(result => dispatch(getUser(result)))
   }
 
   return (
     <main>
       <Avatar />
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
-        <h2 className="form__title">Валентина Космодемьянская</h2>
+        <h2 className="form__title">{user?.display_name ?? user?.login}</h2>
 
         <div className="form__fields">
 
           <FormField
-            register={register('email', {
+            register={register('form.email', {
               required: 'Заполните поле',
               pattern: {
                 value: email,
                 message: 'Некорректно введена почта'
               }
             })}
+            value={user?.email}
             placeholder="Почта"
             errorText={errorToString(errors?.email)}
           />
 
           <FormField
-            register={register('login', {
+            register={register('form.login', {
               required: 'Заполните поле',
               pattern: {
                 value: login,
@@ -63,6 +78,7 @@ export const Profile: React.FC = (): JSX.Element => {
               }
             })}
             placeholder="Логин"
+            value={user?.login}
             errorText={errorToString(errors?.login)}
           />
 
@@ -78,6 +94,7 @@ export const Profile: React.FC = (): JSX.Element => {
               }
             })}
             placeholder="Имя в чате"
+            value={user?.display_name}
             errorText={errorToString(errors?.display_name)}
           />
 
@@ -90,6 +107,7 @@ export const Profile: React.FC = (): JSX.Element => {
               }
             })}
             placeholder="Имя"
+            value={user?.first_name}
             errorText={errorToString(errors?.first_name)}
           />
 
@@ -102,6 +120,7 @@ export const Profile: React.FC = (): JSX.Element => {
               }
             })}
             placeholder="Фамилия"
+            value={user?.second_name}
             errorText={errorToString(errors?.second_name)}
           />
 
@@ -114,6 +133,7 @@ export const Profile: React.FC = (): JSX.Element => {
               }
             })}
             placeholder="Телефон"
+            value={user?.phone}
             errorText={errorToString(errors?.phone)}
           />
 

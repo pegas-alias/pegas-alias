@@ -1,4 +1,6 @@
 import React, { useRef } from 'react';
+
+import { useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
@@ -6,9 +8,10 @@ import { FormField, Button, Avatar } from '../components';
 import { errorToString, pattern } from '../utils';
 
 import './../scss/form/form.scss';
+import { changePasswordAPI } from '../services/http/profile';
 
 export const ChangePassword: React.FC = (): JSX.Element => {
-
+  const user = useSelector((state: any) => state.user.user);
   const { password } = pattern();
 
   const {
@@ -26,14 +29,14 @@ export const ChangePassword: React.FC = (): JSX.Element => {
   const navigate = useNavigate();
 
   const onSubmit = (data: Record<string, unknown>) => {
-    console.log(data)
+    changePasswordAPI(data)
   }
 
   return (
     <main>
       <Avatar />
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
-        <h2 className="form__title">Валентина Космодемьянская</h2>
+        <h2 className="form__title">{user?.display_name ?? user?.login}</h2>
 
         <div className="form__fields">
 

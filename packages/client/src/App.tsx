@@ -1,12 +1,17 @@
-// import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import PageNavigation from './components/page-navigation/page-navigation';
 import { Main, Login, SignUp, NewGame, Profile, Rules, Leaders, Forum, Round, ChangePassword } from './pages/index';
 
 
 import './scss/style.scss';
+import { getUserAPI } from './services/http/profile';
+import { getUser } from './services/store/userSlice';
 
 export function App() {
+  const dispatch = useDispatch();
+  getUserAPI().then(data => dispatch(getUser(data)))
+
   // useEffect(() => {
   //   // Предустановка я.практикум:
   //   // const fetchServerData = async () => {
