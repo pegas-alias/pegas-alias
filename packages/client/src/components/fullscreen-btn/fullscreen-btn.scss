@@ -15,16 +15,9 @@ body:fullscreen::backdrop {
 
 .fullscreen-btn {
   cursor: pointer;
-  position: fixed;
-  bottom: 15px;
-  right: 15px;
-  z-index: 2;
-  padding: 10px;
-  background: $icon-bg;
-  border-radius: 10px;
-  box-shadow: $card-shadow;
+  transition: 0.3s;
   
-  path {
-    transition: 0.3s;
+  &:hover {
+    opacity: .8;
   }
 }

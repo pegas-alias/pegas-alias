@@ -1,6 +1,6 @@
 import React from 'react'
 import './fullscreen-btn.scss'
-import fullscreenIcon from './../../assets/images/fullscreen.svg';
+import fullscreenIcon from '@/assets/images/fullscreen.svg';
 
 export function FullscreenBtn() {
   function handleClick(): void {

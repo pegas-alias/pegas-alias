@@ -1,0 +1,39 @@
+@import './../../scss/base/variables';
+@import './../../scss/base/mixins';
+
+.app-settings {
+  position: fixed;
+  top: 10px;
+  right: 0;
+  display: flex;
+  min-height: 50px;
+  box-shadow: $button-shadow;
+  border-radius: 10px 0 0 10px;
+  transform: translateX(calc(100% - 39px));
+  transition: 0.3s transform;
+  z-index: 10;
+  
+  &--open {
+    transform: none;
+    background: #ccdafc;
+    
+    .app-settings__trigger {
+      transform: rotate(180deg);
+      border-right: 0;
+    }
+  }
+}
+
+.app-settings__togglers {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding: 13px 15px;
+}
+
+.app-settings__trigger {
+  border: 0;
+  width: 40px;
+  background: url('@/assets/images/settings-arrow.svg') center no-repeat;
+  cursor: pointer;
+}

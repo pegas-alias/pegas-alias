@@ -1,0 +1,15 @@
+@import './../../scss/base/variables';
+@import './../../scss/base/mixins';
+
+.theme-btn {
+  background: url('@/assets/images/dark-mode.svg') center no-repeat;
+  font-size: 0;
+  border: 0;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+
+  &:hover {
+    opacity: .8;
+  }
+}
