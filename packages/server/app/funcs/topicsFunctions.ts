@@ -15,10 +15,12 @@ export async function getTopicById(id: number) {
     include: [
       {
         model: Comments,
+        order: [['createdAt', 'DESC']],
         attributes: ['message', 'author_name', 'author_id', 'createdAt', 'updatedAt', 'topic_id', 'comment_id', 'bind_comment_id'],
         include: [
           {
             model: Comments,
+            order: [['createdAt', 'DESC']],
             attributes: ['message', 'author_name', 'author_id', 'createdAt', 'updatedAt', 'topic_id', 'comment_id', 'bind_comment_id'],
             include: [
               {
@@ -48,6 +50,7 @@ export async function getAllTopics(props: pager) {
   return Topics.findAndCountAll({
     offset: offset || 0,
     limit: limit || 10,
+    order: [['createdAt', 'DESC']],
     include: [
       {
         model: Comments,

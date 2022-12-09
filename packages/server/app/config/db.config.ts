@@ -19,7 +19,6 @@ export const sequelizeOptions: SequelizeOptions = {
 }
 
 export const sequelize = new Sequelize(sequelizeOptions)
-
 export const Topics = sequelize.define(
   'Topics', 
   topicModel, 
@@ -48,7 +47,6 @@ Topics.hasMany(Comments, {foreignKey: 'topic_id'})
 Comments.hasMany(Comments, {foreignKey: 'bind_comment_id'})
 
 Comments.hasMany(Like, {foreignKey: 'comment_id'})
-
 
 export async function dbConnect() {
   try {

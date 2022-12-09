@@ -26,8 +26,8 @@ export const ForumDetail: React.FC = (): JSX.Element => {
         <div className="forum__body">
           <ForumBody {...topic} />
           <div className="forum__comments">
-            {topic.Comments && 
-              topic.Comments.map(comment => { if (!comment.bind_comment_id) {
+            {topic?.Comments && 
+              topic?.Comments.map(comment => { if (!comment.bind_comment_id) {
                 return <Comment {...comment} key={comment.comment_id} />
               }                
             })}
