@@ -4,11 +4,11 @@ import { topicModel } from '../models/topicModel'
 import { commentModel } from '../models/commentModel'
 import { likeModel } from '../models/likeModel'
 
-const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT } =
+const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT, POSTGRES_1_PORT_5432_TCP_ADDR } =
   process.env
 
 export const sequelizeOptions: SequelizeOptions = {
-  host: 'localhost',
+  host: POSTGRES_1_PORT_5432_TCP_ADDR || 'localhost',
   username: POSTGRES_USER || 'postgres',
   password: POSTGRES_PASSWORD || 'postgres',
   database: POSTGRES_DB  || 'postgres',
@@ -19,7 +19,6 @@ export const sequelizeOptions: SequelizeOptions = {
 }
 
 export const sequelize = new Sequelize(sequelizeOptions)
-
 export const Topics = sequelize.define(
   'Topics', 
   topicModel, 
@@ -48,7 +47,6 @@ Topics.hasMany(Comments, {foreignKey: 'topic_id'})
 Comments.hasMany(Comments, {foreignKey: 'bind_comment_id'})
 
 Comments.hasMany(Like, {foreignKey: 'comment_id'})
-
 
 export async function dbConnect() {
   try {
