@@ -2,6 +2,9 @@ import React, { RefObject, useRef, useState } from 'react'
 import { Button } from '../../components'
 import { Modal } from './modal'
 import './../../scss/form/form.scss'
+import { changeProfileAvatarAPI } from '../../services/http/profile'
+import { useAppDispatch } from '../../services/hooks/useState'
+import { getUserApi } from '../../services/store/user'
 
 interface IModal {
   isOpen: boolean
@@ -30,9 +33,33 @@ export function EditAvatarModal(props: IModal) {
     }
     changeFileName(fileObj.name)
   }
+ 
+  const dispatch = useAppDispatch()
 
+const handleChangeAvatar = () => {
+  if(inputRef !== null) {
+    if(inputRef.current !== null)  {
+      if(inputRef.current.files !== null) {
+        if(inputRef.current.files[0] !== null) {
+          const formData = new FormData();
+          formData.append('file', inputRef.current.files[0]);
+          changeProfileAvatarAPI(formData)
+          .then((res) => {
+            if(res) {
+              dispatch(getUserApi())
+                close()
+            }
+          })
+          .catch(e => console.log(e))
+        }
+      }
+    }
+  }
+  
+}
   return (
     <Modal isOpen={props.isOpen} close={props.close}>
+      
       <h1 className="avatar__title">Поменять аватар</h1>
       <input
         style={{ display: 'none' }}
@@ -49,8 +76,11 @@ export function EditAvatarModal(props: IModal) {
         type="button"
         text="Выберите файл"
       />
-      <Button classes="mb-28" text="Сохранить" type="submit" />
+      <Button classes="mb-28" text="Сохранить" events={{
+          onClick: handleChangeAvatar,
+        }}/>
       <p>{name ?? 'Файл не выбран'}</p>
+     
     </Modal>
   )
 }

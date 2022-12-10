@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { UserInfo } from '../../../types/user';
 import { UserState } from './type';
-import { changeProfile, getUserApi } from './userThunk';
+import { authLogout, changeProfile, getUserApi } from './userThunk';
 
 
 const initialState: UserState = {
@@ -25,7 +25,7 @@ const userSlice = createSlice({
     getUser(state, action: PayloadAction<UserInfo>) {
       const data = action.payload;
       state.user = data;
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -38,6 +38,9 @@ const userSlice = createSlice({
       })
       .addCase(changeProfile.fulfilled, (state, action) => {
         state.user = action.payload;
+      })
+      .addCase(authLogout.fulfilled, (state) => {
+        state.user = {...initialState.user};
       })
   },
 })
