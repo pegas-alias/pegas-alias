@@ -17,7 +17,7 @@ export const getTeamById = async (req: Request, res: Response) => {
   }, res, 'Что-то пошло не так');
 }
 
-// Создать новую тему
+// Создать новую команду
 export const createNewTeam = async (req: Request, res: Response) => {
   const { title, question, author_id, author_name } = req.body
   await processResult(() => {
@@ -29,11 +29,17 @@ export const createNewTeam = async (req: Request, res: Response) => {
     })
   }, res, 'Что-то пошло не так');
 }
-// Удалить комментарий
+// Удалить команду
 export const deleteTeamById = async (req: Request, res: Response) => {
   const { id } = req.params
   await processResult(() => {
     return teamFunctions.deleteTeamById(Number(id))
   }, res, 'Что-то пошло не так')
 }
-    
+// Получить список TOP 10
+export const getLeaderBoard = async (req: Request, res: Response) => {
+    const { id } = req.params
+    await processResult(() => {
+      return teamFunctions.getLeaderBoard()
+    }, res, 'Что-то пошло не так');
+  }

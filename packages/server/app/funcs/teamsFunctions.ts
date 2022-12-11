@@ -1,12 +1,12 @@
 import type { ITeam } from '../models/teamModel'
-import { Comments, Like, Topics, Teams } from '../config/db.config'
+import { Comments, Like, Teams } from '../config/db.config'
 
-// Создание топика
+// Создание команды
 export async function createNewTeam(props: ITeam) {
   return Teams.create({ ...props })
 }
 
-// Получение топика по Id
+// Получение команды по Id
 export async function getTeamById(id: number) {
   return Teams.findOne({ 
     where: { 
@@ -51,6 +51,20 @@ export async function getAllTeams(props: pager) {
     offset: offset || 0,
     limit: limit || 10,
     order: [['createdAt', 'DESC']],
+    include: [
+      {
+        model: Comments,
+        attributes: ['message', 'author_name', 'author_id', 'createdAt', 'updatedAt', 'team_id'],
+      }
+    ]
+  })
+}
+// Получение списка ТОР 10
+export async function getLeaderBoard() {
+  return Teams.findAndCountAll({ 
+    offset: 0,
+    limit: 10,
+    order: [['score', 'DESC']],
     include: [
       {
         model: Comments,

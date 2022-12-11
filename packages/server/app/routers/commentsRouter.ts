@@ -1,12 +1,12 @@
 import express from 'express'
 import { createNewComment, deleteCommentById } from '../controllers/commentsController'
 
-const router = express.Router()
+const commentsRouter = express.Router()
 
 // Создание комментария
-router.post('/', createNewComment)
+commentsRouter.post('/', createNewComment)
 
 // Удаление комментария
-router.delete('/:id', deleteCommentById)
+commentsRouter.delete('/:id', deleteCommentById)
 
-export default router;
+export default commentsRouter;

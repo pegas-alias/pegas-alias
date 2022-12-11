@@ -1,15 +1,15 @@
 import express from 'express'
 import { createTopic, getTopicById, getTopics } from '../controllers/topicsController'
 
-const router = express.Router();
+const topicsRouter = express.Router();
 
 // Получение списка всех тем
-router.get('/', getTopics)
+topicsRouter.get('/', getTopics)
 
 // Получение темы по Id
-router.get('/:id', getTopicById)
+topicsRouter.get('/:id', getTopicById)
 
 // Создание новой темы
-router.post('/', createTopic)
+topicsRouter.post('/', createTopic)
 
-export default router;
+export default topicsRouter;
