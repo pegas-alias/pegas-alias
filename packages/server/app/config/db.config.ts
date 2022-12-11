@@ -41,7 +41,14 @@ export const Like = sequelize.define(
     tableName: 'like',
     initialAutoIncrement: '100000'
   })
-
+  export const Teams = sequelize.define(
+  'Teams',
+  likeModel, 
+  {
+    tableName: 'teams',
+    initialAutoIncrement: '100'
+  })
+  
 Topics.hasMany(Comments, {foreignKey: 'topic_id'})
 
 Comments.hasMany(Comments, {foreignKey: 'bind_comment_id'})
@@ -82,7 +89,6 @@ export function startApp() {
         author_id: 1003,
         author_name: 'Читерило'
       })
-
       Comments.create({
         comment_id: 100000001,
         message: 'ты що, Вася, какие Читы??',
@@ -103,20 +109,19 @@ export function startApp() {
         author_id: 1006,
         author_name: 'Мозг',
         topic_id: 100003
-      })     
-
+      })
       Like.create({
         like_id: 1000000001,
         author_id: 1002,
         comment_id: 100000001,
         topic_id: 100003
-      })      
+      })
       Like.create({
         like_id: 1000000002,
         author_id: 1005,
         comment_id: 100000001,
         topic_id: 100003
-      })      
+      })
       Like.create({
         like_id: 1000000003,
         author_id: 1006,
