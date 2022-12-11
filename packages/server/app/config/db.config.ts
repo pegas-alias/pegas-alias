@@ -41,7 +41,14 @@ export const Like = sequelize.define(
     tableName: 'like',
     initialAutoIncrement: '100000'
   })
-
+  export const Teams = sequelize.define(
+  'Teams',
+  likeModel, 
+  {
+    tableName: 'teams',
+    initialAutoIncrement: '100'
+  })
+  
 Topics.hasMany(Comments, {foreignKey: 'topic_id'})
 
 Comments.hasMany(Comments, {foreignKey: 'bind_comment_id'})
