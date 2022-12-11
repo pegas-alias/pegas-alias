@@ -13,6 +13,7 @@ services:
     restart: always
     ports:
       - ${SERVER_PORT}:3001
+      - 80:80
     environment:
       CLIENT_PORT: ${CLIENT_PORT}
       SERVER_PORT: ${SERVER_PORT}
