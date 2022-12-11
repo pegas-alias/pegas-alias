@@ -1,6 +1,4 @@
 import React, { useEffect } from 'react';
-import { Provider } from 'react-redux'
-import store from './services/store/reducer'
 import { useAppDispatch } from './services/hooks';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import {
@@ -21,7 +19,7 @@ import {
   NotFoundPage,
   RoundEnd,
 } from './pages'
-import { PageNavigation, AppSettings } from './components'
+import { AppSettings } from './components'
 
 import './scss/style.scss';
 import { getUserApi } from './services/store/user';
@@ -42,32 +40,31 @@ export const App: React.FC = () => {
   calcAppHeight();
   
   return (
-    <div className="app">
-      <Provider store={store}>
-      <Router>
-        <AppSettings />
-        <PageNavigation />
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/change-password" element={<ChangePassword />} />
-          <Route path="/rules" element={<Rules />} />
-          <Route path="/leaders" element={<Leaders />} />
-          <Route path="/forum" element={<ForumPage />} />
-          <Route path="/score-in-round" element={<ScoreInRoundPage />} />
-          <Route path="/game-start" element={<GameStart />} />
-          <Route path="/forum-detail" element={<ForumDetail />} />
-          <Route path="/500" element={<ServerErrorPage />} />
-          <Route path="/round-process" element={<RoundProcess />} />
-          <Route path="/winner" element={<WinnerPage />} />
-          <Route path="/*" element={<NotFoundPage />} />
-          <Route path="/round-process" element={<RoundProcess />} />
-          <Route path="/round-end" element={<RoundEnd />} />
-        </Routes>
-      </Router>
-      </Provider>
-    </div>
+    <React.StrictMode>
+      <div className="app">
+        <Router>
+          <AppSettings />
+          <Routes>
+            <Route path="/" element={<Main />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/sign-up" element={<SignUp />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/change-password" element={<ChangePassword />} />
+            <Route path="/rules" element={<Rules />} />
+            <Route path="/leaders" element={<Leaders />} />
+            <Route path="/forum" element={<ForumPage />} />
+            <Route path="/score-in-round" element={<ScoreInRoundPage />} />
+            <Route path="/game-start" element={<GameStart />} />
+            <Route path="/forum-detail" element={<ForumDetail />} />
+            <Route path="/500" element={<ServerErrorPage />} />
+            <Route path="/round-process" element={<RoundProcess />} />
+            <Route path="/winner" element={<WinnerPage />} />
+            <Route path="/*" element={<NotFoundPage />} />
+            <Route path="/round-process" element={<RoundProcess />} />
+            <Route path="/round-end" element={<RoundEnd />} />
+          </Routes>
+        </Router>
+      </div>
+    </React.StrictMode>
   )
 }
