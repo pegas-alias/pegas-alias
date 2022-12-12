@@ -24,7 +24,7 @@ export default defineConfig({
       registerType: 'prompt',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,ttf,eot,woff,woff2,json,mp3}']
+        globPatterns: ['**/*.{js,css,ico,png,svg,ttf,eot,woff,woff2,json,mp3}']
       },
       manifest: {
         name: 'Pegas Alias',

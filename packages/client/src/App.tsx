@@ -21,7 +21,7 @@ import {
   NotFoundPage,
   RoundEnd,
 } from './pages'
-import { PageNavigation, AppSettings } from './components'
+import { AppSettings } from './components'
 
 import './scss/style.scss';
 import { getUserApi } from './services/store/user';
@@ -46,7 +46,6 @@ export const App: React.FC = () => {
       <Provider store={store}>
       <Router>
         <AppSettings />
-        <PageNavigation />
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/login" element={<Login />} />

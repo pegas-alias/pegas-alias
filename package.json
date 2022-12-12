@@ -1,5 +1,5 @@
 {
-  "name": "Pegas_Alias",
+  "name": "pegas_alias",
   "private": true,
   "scripts": {
     "bootstrap": "yarn && node init.js && lerna clean && yarn && lerna bootstrap",
