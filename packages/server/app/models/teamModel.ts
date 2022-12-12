@@ -2,34 +2,39 @@ import { DataType, Model } from 'sequelize-typescript'
 import type { ModelAttributes } from 'sequelize/types'
 
 export interface ITeam {
-  topic_id?: number,
-  title: string,
-  question: string,
-  author_id: number,
-  author_name: string
+  team_id?: number,
+  name: string,
+  victories: number,
+  games: number,
+  words: number,
+  player_id: number
 }
 
-export const topicModel: ModelAttributes<Model, ITeam> = {
-  topic_id: {
+export const teamModel: ModelAttributes<Model, ITeam> = {
+  team_id: {
     type: DataType.INTEGER,
     primaryKey: true,
     autoIncrement: true,
     allowNull: false
   },
-  title: {
+  name: {
     type: DataType.STRING,
     allowNull: false,
   },
-  question: {
-    type: DataType.STRING,
-    allowNull: false,
-  },
-  author_name: {
-    type: DataType.STRING,
-    allowNull: false,
-  },
-  author_id: {
+  victories: {
     type: DataType.INTEGER,
-    allowNull: false
+    allowNull: true,
   },
+  games: {
+    type: DataType.INTEGER,
+    allowNull: true,
+  },
+  words: {
+    type: DataType.INTEGER,
+    allowNull: true,
+  },
+  player_id: {
+    type: DataType.INTEGER,
+    allowNull: false,
+  }
 }

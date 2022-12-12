@@ -3,6 +3,7 @@ import { Sequelize } from 'sequelize-typescript'
 import { topicModel } from '../models/topicModel'
 import { commentModel } from '../models/commentModel'
 import { likeModel } from '../models/likeModel'
+import { teamModel } from '../models/teamModel'
 
 const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT, POSTGRES_1_PORT_5432_TCP_ADDR } =
   process.env
@@ -43,7 +44,7 @@ export const Like = sequelize.define(
   })
   export const Teams = sequelize.define(
   'Teams',
-  likeModel, 
+  teamModel, 
   {
     tableName: 'teams',
     initialAutoIncrement: '100'
@@ -68,6 +69,21 @@ export async function dbConnect() {
 export function startApp() {
   dbConnect().then(
     () => {
+      Teams.create({
+        name: 'Жульверн',
+        victories: 0,
+        games: 0,
+        words: 0,
+        player_id: 0
+      })
+      Teams.create({
+        name: 'Девчонки',
+        victories: 0,
+        games: 0,
+        words: 0,
+        player_id: 0
+      })
+      
       Topics.create({
         topic_id: 100001,
         title: 'Жульверн',
@@ -81,6 +97,8 @@ export function startApp() {
         question: 'Это же самый топ оф зе топ оф зе топ из всех игр',
         author_id: 1002,
         author_name: 'Рикардо'
+      }).then( ()=> {
+      
       })
       Topics.create({
         topic_id: 100003,
