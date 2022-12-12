@@ -97,8 +97,6 @@ export function startApp() {
         question: 'Это же самый топ оф зе топ оф зе топ из всех игр',
         author_id: 1002,
         author_name: 'Рикардо'
-      }).then( ()=> {
-      
       })
       Topics.create({
         topic_id: 100003,
