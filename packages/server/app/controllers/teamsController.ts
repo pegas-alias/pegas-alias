@@ -19,13 +19,14 @@ export const getTeamById = async (req: Request, res: Response) => {
 
 // Создать новую команду
 export const createNewTeam = async (req: Request, res: Response) => {
-  const { title, question, author_id, author_name } = req.body
+  const { name, victories, games, words, player_id } = req.body
   await processResult(() => {
     return teamFunctions.createNewTeam({
-      title: title,
-      question: question,
-      author_id: Number(author_id),
-      author_name: author_name
+      name: name,
+      victories: Number(victories),
+      games: Number(games),
+      words: Number(words),
+      player_id: Number(player_id)
     })
   }, res, 'Что-то пошло не так');
 }
@@ -38,8 +39,7 @@ export const deleteTeamById = async (req: Request, res: Response) => {
 }
 // Получить список TOP 10
 export const getLeaderBoard = async (req: Request, res: Response) => {
-    const { id } = req.params
-    await processResult(() => {
-      return teamFunctions.getLeaderBoard()
-    }, res, 'Что-то пошло не так');
-  }
+  await processResult(() => {
+    return teamFunctions.getLeaderBoard()
+  }, res, 'Что-то пошло не так');
+}
