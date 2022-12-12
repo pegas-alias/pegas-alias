@@ -19,6 +19,7 @@ import {
   clearGameSettings,
   changeRoundScore
 } from '../../services/store/game';
+import { LOCAL_URL } from '../../constants';
 
 import checkIcon from './../../assets/images/check.svg'
 import questionIcon from './../../assets/images/question.svg';
@@ -29,7 +30,6 @@ import { getPublicData } from '../../services/http/game';
 
 const nullTeamValue = 'Никто';
 const explanationTestWord = 'машина';
-const HOST_ADDRESS = 'http://localhost:3001';
 const DESC_API_PATH = '/api/v1/desc/';
 
 export const RoundBoard: React.FC = () => {
@@ -76,7 +76,7 @@ export const RoundBoard: React.FC = () => {
   }, [])
 
   useEffect(() => {
-    getPublicData(HOST_ADDRESS + DESC_API_PATH + explanationTestWord)
+    getPublicData(LOCAL_URL + DESC_API_PATH + explanationTestWord)
       .then((result: {word: string, explanation: string}) => {
         if (result && result.explanation) {
           toggleExplanationConnected(true)
@@ -194,7 +194,7 @@ export const RoundBoard: React.FC = () => {
               events={{
                 onClick: (e) => {
                   e.preventDefault();
-                  getPublicData(HOST_ADDRESS + DESC_API_PATH + item.word)
+                  getPublicData(LOCAL_URL + DESC_API_PATH + item.word)
                     .then((result: {word: string, explanation: string}) => {
                       if (result && result.explanation) {
                         setWordDesc({
@@ -247,7 +247,7 @@ export const RoundBoard: React.FC = () => {
                 onClick: (e) => {
                   e.preventDefault();
                   e.stopPropagation();
-                  getPublicData(HOST_ADDRESS + DESC_API_PATH + wordForAll.word)
+                  getPublicData(LOCAL_URL + DESC_API_PATH + wordForAll.word)
                     .then((result: {word: string, explanation: string}) => {
                       if (result && result.explanation) {
                         setWordDesc({
