@@ -3,7 +3,7 @@ import type { ModelAttributes } from 'sequelize/types'
 
 export interface ITeam {
   team_id?: number,
-  name: string,
+  teamName: string,
   victories: number,
   games: number,
   words: number,
@@ -17,7 +17,7 @@ export const teamModel: ModelAttributes<Model, ITeam> = {
     autoIncrement: true,
     allowNull: false
   },
-  name: {
+  teamName: {
     type: DataType.STRING,
     allowNull: false,
   },

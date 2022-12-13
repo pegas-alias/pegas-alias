@@ -26,7 +26,7 @@ export async function getAllTeams(props: pager) {
   return Teams.findAndCountAll({
     offset: offset || 0,
     limit: limit || 10,
-    order: [['name', 'DESC']],
+    order: [['teamName', 'DESC']],
   })
 }
 

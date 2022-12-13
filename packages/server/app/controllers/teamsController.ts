@@ -22,7 +22,7 @@ export const createNewTeam = async (req: Request, res: Response) => {
   const { name, victories, games, words, player_id } = req.body
   await processResult(() => {
     return teamFunctions.createNewTeam({
-      name: name,
+      teamName: name,
       victories: Number(victories),
       games: Number(games),
       words: Number(words),

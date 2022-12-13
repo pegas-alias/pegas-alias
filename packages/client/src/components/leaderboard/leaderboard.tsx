@@ -75,7 +75,7 @@ export function Leaderboard() {
         </div>
       </div>
       <div className='leaderboard__results'>
-        {leaders && leaders.map(team => {
+        {leaders && Array.isArray(leaders) && leaders.map(team => {
           return (
             <div className='leaderboard__result-item' key={team.teamName}>
               <span className='leaderboard__result-title'>{team.teamName}:</span>

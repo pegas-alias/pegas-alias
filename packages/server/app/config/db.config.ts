@@ -70,17 +70,38 @@ export function startApp() {
   dbConnect().then(
     () => {
       Teams.create({
-        name: 'Жульверн',
-        victories: 0,
-        games: 0,
-        words: 0,
+        teamName: 'Жульверн',
+        victories: 10,
+        games: 32,
+        words: 123,
         player_id: 0
       })
       Teams.create({
-        name: 'Девчонки',
-        victories: 0,
-        games: 0,
-        words: 0,
+        teamName: 'Астронафты',
+        victories: 15,
+        games: 100,
+        words: 32,
+        player_id: 0
+      })
+      Teams.create({
+        teamName: 'Девчонки',
+        victories: 25,
+        games: 10,
+        words: 320,
+        player_id: 0
+      })
+      Teams.create({
+        teamName: 'Мальчики',
+        victories: 3,
+        games: 12,
+        words: 33,
+        player_id: 0
+      })
+      Teams.create({
+        teamName: 'Тюлени',
+        victories: 5,
+        games: 10,
+        words: 32,
         player_id: 0
       })
       
