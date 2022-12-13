@@ -1,6 +1,11 @@
 import type { ITeam } from '../models/teamModel'
 import { Teams } from '../config/db.config'
 
+type pager = {
+  offset?: number
+  limit?: number
+}
+
 // Создание команды
 export async function createNewTeam(props: ITeam) {
   return Teams.create({ ...props })
@@ -15,12 +20,7 @@ export async function getTeamById(id: number) {
   })
 }
 
-type pager = {
-  offset?: number
-  limit?: number
-}
-
-// Получить все топики форума и связанные комменты, для определения последнего
+// Получить все команды
 export async function getAllTeams(props: pager) {
   const { offset, limit } = props
   return Teams.findAndCountAll({
@@ -29,11 +29,13 @@ export async function getAllTeams(props: pager) {
     order: [['name', 'DESC']],
   })
 }
+
 // Получение списка ТОР 10
-export async function getLeaderBoard() {
+export async function getLeaderBoard(props: pager) {
+  const { offset, limit } = props
   return Teams.findAndCountAll({ 
-    offset: 0,
-    limit: 10,
+    offset: offset || 0,
+    limit: limit || 10,
     order: [['words', 'DESC']],
   })
 }

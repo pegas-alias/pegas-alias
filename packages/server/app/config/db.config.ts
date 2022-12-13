@@ -100,7 +100,7 @@ export function startApp() {
       })
       Topics.create({
         topic_id: 100003,
-        title: 'По фасту',
+        title: 'По факту',
         question: 'Что по чит кодам, пацантре?',
         author_id: 1003,
         author_name: 'Читерило'
