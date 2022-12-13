@@ -5,7 +5,7 @@ import { useQueryParams } from '../../services/hooks/useQueryParams'
 import { useAppDispatch } from '../../services/hooks/useState'
 
 import { Button, RangeLine } from '../../components'
-import { getLeadersApi } from '../../services/store/leaders/leadersThunk'
+import { getLeadersApi } from '../../services/store/leaders/'
 import { FilterState } from '../../services/store/leaders/type'
 import { RootState } from '../../services/store/reducer'
 import { Team } from '../../types/leaders'
@@ -25,7 +25,7 @@ export function Leaderboard() {
   const [filter, setFilter] = useState(initialStateFilter)
   const leaders: Array<Team> = useSelector((state: RootState) => state.leaders.leaders)
 
-  const changeFilter= (filterName: string) => {
+  const changeFilter = (filterName: string) => {
     navigate({
       pathname: '/leaders',
       search: `?filter=${filterName}`

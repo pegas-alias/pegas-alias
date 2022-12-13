@@ -1,5 +1,5 @@
 import express from 'express'
-import { createNewTeam, deleteTeamById, getLeaderBoard} from '../controllers/teamsController'
+import { createNewTeam, deleteTeamById, getTeams, getLeaderBoard} from '../controllers/teamsController'
 
 const teamsRouter = express.Router()
 
@@ -8,6 +8,9 @@ teamsRouter.post('/', createNewTeam)
 
 // Удаление команды
 teamsRouter.delete('/:id', deleteTeamById)
+
+// Получение всех команд
+teamsRouter.get('/', getTeams)
 
 // Получение Списка ТОР 10
 teamsRouter.get('/leaderboard', getLeaderBoard)

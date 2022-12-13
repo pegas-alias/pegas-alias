@@ -133,7 +133,7 @@ export async function createServer(
     }
   });
 
-  app.use('/', express.static('../client/dist/client/'))
+  app.use('/assets', express.static('../client/dist/client/assets'))
   
   app.get('/*', async (req, res) => {
     const result = render(req.originalUrl)
