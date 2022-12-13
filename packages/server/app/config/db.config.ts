@@ -129,7 +129,7 @@ export function startApp() {
             author_id: 1006,
             comment_id: 100000001,
             topic_id: 100003
-          })
+          })    
         })
         Comments.create({
           comment_id: 100000002,
@@ -144,7 +144,7 @@ export function startApp() {
           author_id: 1006,
           author_name: 'Мозг',
           topic_id: 100003
-        })
+        })            
       })
     }
   )
