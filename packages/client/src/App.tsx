@@ -20,8 +20,7 @@ import {
   WinnerPage,
   NotFoundPage,
   RoundEnd,
-} from './pages'
-import { PageNavigation } from './components'
+} from './pages';
 
 import './scss/style.scss';
 import { getUserApi } from './services/store/user';
@@ -40,12 +39,12 @@ export const App: React.FC = () => {
   }
   window.addEventListener('resize', calcAppHeight);
   calcAppHeight();
+
   
   return (
     <div className="app">
       <Provider store={store}>
       <Router>
-        <PageNavigation />
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/login" element={<Login />} />

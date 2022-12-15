@@ -7,6 +7,7 @@ import { getTopicApi } from '../services/store/topic'
 import { useSelector } from 'react-redux'
 import { RootState } from '../services/store/reducer'
 import { ITopic } from '../services/store/topic/type'
+import { authorization } from '../utils'
 
 
 export const ForumDetail: React.FC = (): JSX.Element => {
@@ -16,7 +17,9 @@ export const ForumDetail: React.FC = (): JSX.Element => {
   const topic: ITopic = useSelector((state: RootState) => state.topic.topic)
   useEffect(() => {
       dispatch(getTopicApi(topicId))
-  }, [topicId])
+  }, [topicId]);
+
+  authorization();
   return (
     <>
       <header>

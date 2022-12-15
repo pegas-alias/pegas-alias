@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '../services/hooks';
 
 import { FormField, Button, Avatar, BackLink } from '../components';
 
-import { errorToString, pattern } from '../utils';
+import { authorization, errorToString, pattern } from '../utils';
 import './../scss/form/form.scss';
 import { UserInfo } from '../types/user';
 import { changeProfile } from '../services/store/user';
@@ -30,9 +30,10 @@ export const Profile: React.FC = (): JSX.Element => {
 
   useEffect(() => {
     reset(user);
-  }, [user])
+  }, [user]);
 
-  const navigate = useNavigate();
+
+  authorization();
 
   const onSubmit = (data: UserInfo) => {
     dispatch(changeProfile(data));
@@ -41,7 +42,7 @@ export const Profile: React.FC = (): JSX.Element => {
   return (
     <>
       <header>
-        <BackLink text="В главное меню"/>
+        <BackLink text="В главное меню" />
       </header>
       <main>
         <Avatar />

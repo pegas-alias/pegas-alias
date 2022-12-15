@@ -21,7 +21,7 @@ import {
     NotFoundPage,
     RoundEnd,
   } from './pages'
-  import { PageNavigation, FullscreenBtn } from './components'
+  import { FullscreenBtn } from './components'
 
   import './scss/style.scss';
 
@@ -52,7 +52,6 @@ export const render = (url:string) => {
         <Provider store= {store}>
         <StaticRouter location={url}>
             <FullscreenBtn />
-            <PageNavigation/>
             <Page/>
         </StaticRouter>
         </Provider>

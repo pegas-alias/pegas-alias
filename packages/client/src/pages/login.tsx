@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { FormField, Button, Intro } from '../components'
 import { LOCAL_URL } from '../constants'
 import { loginUser, signUpYaOAuth } from '../services/http/login'
-import { ErrorMessage, errorToString, pattern } from '../utils'
+import { authorization, ErrorMessage, errorToString, pattern } from '../utils'
 
 import './../scss/form/form.scss'
 
@@ -32,6 +32,8 @@ export const Login: React.FC = (): JSX.Element => {
       )
     })
   }
+
+  authorization();
   return (
     <main>
       <Intro />
@@ -56,7 +58,6 @@ export const Login: React.FC = (): JSX.Element => {
               },
             })}
             placeholder="Логин"
-            value="nini2"
             errorText={errorToString(errors?.login as ErrorMessage)}
           />
 
@@ -70,7 +71,6 @@ export const Login: React.FC = (): JSX.Element => {
             })}
             type="password"
             placeholder="Пароль"
-            value="Qwerty!23456"
             errorText={errorToString(errors?.password as ErrorMessage)}
           />
         </div>

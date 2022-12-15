@@ -13,7 +13,7 @@ import { DICTIONARIES, IDictionary } from '../dictionaries';
 import crossIcon from '../assets/images/cross-red.svg';
 import plusIcon from '../assets/images/plus-accent.svg';
 import bookIcon from '../assets/images/book-accent.svg';
-import './../scss/form/form.scss'
+import './../scss/form/form.scss';
 
 
 export const GameStart: React.FC = (): JSX.Element => {

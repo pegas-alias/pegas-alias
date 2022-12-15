@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
 import { FormField, Button, Avatar, BackLink } from '../components'
-import { errorToString, pattern } from '../utils'
+import { authorization, errorToString, pattern } from '../utils'
 
 import './../scss/form/form.scss'
 import { changePasswordAPI } from '../services/http/profile'
@@ -34,6 +34,8 @@ export const ChangePassword: React.FC = (): JSX.Element => {
   const onChangePasswordClick = (): void => {
     navigate('/profile')
   }
+
+  authorization();
 
   return (
     <>
