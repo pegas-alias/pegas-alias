@@ -11,6 +11,7 @@ export type Dictionary = {
 export type GameSettings = {
   activeTeams: ActiveTeam[],
   playedTeams: Team[],
+  status: string,
   roundDuration: number,
   wordsToWin: number,
   lastWordForAll: boolean,

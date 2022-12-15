@@ -18,8 +18,7 @@ const leadersSlice = createSlice({
       })
       .addCase(getLeadersApi.fulfilled, (state, action) => {
         state.status = 'resolved'
-        console.log('action.payload',typeof action.payload,action.payload)
-          state.leaders = action.payload.rows
+        state.leaders = action.payload.rows
       })
   }
 })
