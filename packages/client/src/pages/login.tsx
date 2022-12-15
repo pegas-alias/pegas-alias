@@ -7,7 +7,7 @@ import { LOCAL_URL } from '../constants'
 import { useAppDispatch } from '../services/hooks/useState'
 import { loginUser, signUpYaOAuth } from '../services/http/login'
 import { getUserApi } from '../services/store/user'
-import { ErrorMessage, errorToString, pattern } from '../utils'
+import { authorization, ErrorMessage, errorToString, pattern } from '../utils'
 
 import './../scss/form/form.scss'
 
@@ -42,6 +42,8 @@ export const Login: React.FC = (): JSX.Element => {
       )
     })
   }
+
+  authorization();
   return (
     <main>
       <Intro />
