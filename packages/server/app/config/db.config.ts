@@ -4,11 +4,11 @@ import { topicModel } from '../models/topicModel'
 import { commentModel } from '../models/commentModel'
 import { likeModel } from '../models/likeModel'
 
-const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT } =
+const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT, POSTGRES_1_PORT_5432_TCP_ADDR } =
   process.env
 
 export const sequelizeOptions: SequelizeOptions = {
-  host: 'localhost',
+  host: POSTGRES_1_PORT_5432_TCP_ADDR || 'localhost',
   username: POSTGRES_USER || 'postgres',
   password: POSTGRES_PASSWORD || 'postgres',
   database: POSTGRES_DB  || 'postgres',
@@ -19,25 +19,24 @@ export const sequelizeOptions: SequelizeOptions = {
 }
 
 export const sequelize = new Sequelize(sequelizeOptions)
-
 export const Topics = sequelize.define(
-  'Topics', 
-  topicModel, 
+  'Topics',
+  topicModel,
   {
-    tableName: 'topics', 
+    tableName: 'topics',
     initialAutoIncrement: '100'
   })
 
 export const Comments = sequelize.define(
-  'Comments', 
-  commentModel, 
+  'Comments',
+  commentModel,
   {
     tableName: 'comments',
     initialAutoIncrement: '1000'
   })
 export const Like = sequelize.define(
   'Like',
-  likeModel, 
+  likeModel,
   {
     tableName: 'like',
     initialAutoIncrement: '100000'
@@ -48,7 +47,6 @@ Topics.hasMany(Comments, {foreignKey: 'topic_id'})
 Comments.hasMany(Comments, {foreignKey: 'bind_comment_id'})
 
 Comments.hasMany(Like, {foreignKey: 'comment_id'})
-
 
 export async function dbConnect() {
   try {
@@ -83,47 +81,47 @@ export function startApp() {
         question: 'Что по чит кодам, пацантре?',
         author_id: 1003,
         author_name: 'Читерило'
-      })
-
-      Comments.create({
-        comment_id: 100000001,
-        message: 'ты що, Вася, какие Читы??',
-        author_id: 1002,
-        author_name: 'Микоглай',
-        topic_id: 100003
-      })
-      Comments.create({
-        comment_id: 100000002,
-        message: 'пароль - рыба - меч',
-        author_id: 1005,
-        author_name: 'Лол',
-        topic_id: 100003
-      })
-      Comments.create({
-        comment_id: 100000003,
-        message: 'да нет тут никаких читов',
-        author_id: 1006,
-        author_name: 'Мозг',
-        topic_id: 100003
-      })     
-
-      Like.create({
-        like_id: 1000000001,
-        author_id: 1002,
-        comment_id: 100000001,
-        topic_id: 100003
-      })      
-      Like.create({
-        like_id: 1000000002,
-        author_id: 1005,
-        comment_id: 100000001,
-        topic_id: 100003
-      })      
-      Like.create({
-        like_id: 1000000003,
-        author_id: 1006,
-        comment_id: 100000001,
-        topic_id: 100003
+      }).then( ()=> {
+        Comments.create({
+          comment_id: 100000001,
+          message: 'ты що, Вася, какие Читы??',
+          author_id: 1002,
+          author_name: 'Микоглай',
+          topic_id: 100003
+        }).then( ()=> {
+          Like.create({
+            like_id: 1000000001,
+            author_id: 1002,
+            comment_id: 100000001,
+            topic_id: 100003
+          })
+          Like.create({
+            like_id: 1000000002,
+            author_id: 1005,
+            comment_id: 100000001,
+            topic_id: 100003
+          })
+          Like.create({
+            like_id: 1000000003,
+            author_id: 1006,
+            comment_id: 100000001,
+            topic_id: 100003
+          })
+        })
+        Comments.create({
+          comment_id: 100000002,
+          message: 'пароль - рыба - меч',
+          author_id: 1005,
+          author_name: 'Лол',
+          topic_id: 100003
+        })
+        Comments.create({
+          comment_id: 100000003,
+          message: 'да нет тут никаких читов',
+          author_id: 1006,
+          author_name: 'Мозг',
+          topic_id: 100003
+        })
       })
     }
   )

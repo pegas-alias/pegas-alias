@@ -131,14 +131,27 @@ export async function createServer(
     }
   });
 
-  app.use('/', express.static('../client/dist/client/'))
+  app.use('/', express.static('../client/dist/ssr'))
   
   app.get('/*', async (req, res) => {
-    const result = render(req.originalUrl)
-    template = fs.readFileSync(resolve('../client/dist/client/index.html'), 'utf-8')
-    template = await vite.transformIndexHtml(req.originalUrl, template)
-    const html = template.replace(`<div id="root"></div>`,`<div id="root">${result}</div>`)
-    res.status(200).set({ 'Content-Type': 'text/html' }).send(html)
+    const result = render(req.originalUrl);
+    const clientSrc = '../client/dist/client/';
+    const ssrSrc = '../client/dist/ssr/';
+    
+    template = fs.readFileSync(resolve(clientSrc + 'index.html'), 'utf-8');
+    if (fs.existsSync(clientSrc) && !fs.existsSync(ssrSrc + 'assets')) {
+      fs.cpSync(clientSrc + 'assets', ssrSrc + 'assets', { recursive: true });
+      fs.readdir(clientSrc, function(err, files) {
+        files.filter(el => path.extname(el) === '.js').forEach((file) => {
+          fs.cp(clientSrc + file, ssrSrc + file, (error) => {
+            if (error) console.error(error)
+          })
+        });
+      })
+    }
+    template = await vite.transformIndexHtml(req.originalUrl, template);
+    const html = template.replace(`<div id="root"></div>`,`<div id="root">${result}</div>`);
+    res.status(200).set({ 'Content-Type': 'text/html' }).send(html);
   })
   
   app.listen(port, () => {
@@ -146,6 +159,7 @@ export async function createServer(
   })
 
   return { app, vite };
+
 }
 
 createServer().then( () => {

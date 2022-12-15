@@ -8,7 +8,7 @@ import { FormField, Button, Avatar, BackLink } from '../components';
 import { authorization, errorToString, pattern } from '../utils';
 import './../scss/form/form.scss';
 import { UserInfo } from '../types/user';
-import { changeProfile } from '../services/store/user';
+import { authLogout, changeProfile } from '../services/store/user';
 
 export const Profile: React.FC = (): JSX.Element => {
   const { email, login, name, phone } = pattern();
@@ -160,7 +160,10 @@ export const Profile: React.FC = (): JSX.Element => {
               type="button"
               text="Выйти из аккаунта"
               events={{
-                onClick: () => navigate('/login')
+                onClick: () => { 
+                  dispatch(authLogout())
+                  navigate('/login')
+                } 
               }}
             />
           </div>

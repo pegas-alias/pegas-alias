@@ -20,7 +20,8 @@ import {
   WinnerPage,
   NotFoundPage,
   RoundEnd,
-} from './pages';
+} from './pages'
+import { AppSettings } from './components'
 
 import './scss/style.scss';
 import { getUserApi } from './services/store/user';
@@ -45,6 +46,7 @@ export const App: React.FC = () => {
     <div className="app">
       <Provider store={store}>
       <Router>
+        <AppSettings />
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/login" element={<Login />} />
