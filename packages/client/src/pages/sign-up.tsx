@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { Intro, FormField, Button } from '../components'
 import { registerUser } from '../services/http/login'
-import { ErrorMessage, errorToString, pattern } from '../utils'
+import { authorization, ErrorMessage, errorToString, pattern } from '../utils'
 
 import './../scss/form/form.scss'
 
@@ -27,6 +27,7 @@ export const SignUp: React.FC = (): JSX.Element => {
     registerUser(data)
   }
 
+  authorization();
   return (
     <main>
       <Intro small />
