@@ -4,6 +4,7 @@ import { Teams } from '../config/db.config'
 type pager = {
   offset?: number
   limit?: number
+  player_id?: number
 }
 
 // Создание команды
@@ -22,15 +23,17 @@ export async function getTeamById(id: number) {
 
 // Получить все команды
 export async function getAllTeams(props: pager) {
-  const { offset, limit } = props
+  let { offset, limit, player_id } = props
+  if (player_id == void 0) { player_id = 0; }
   return Teams.findAndCountAll({
     offset: offset || 0,
     limit: limit || 10,
     order: [['teamName', 'DESC']],
+    where: { player_id: player_id }
   })
 }
 
-// Получение списка ТОР 10
+// Получение списка ТОР 10 
 export async function getLeaderBoard(props: pager) {
   const { offset, limit } = props
   return Teams.findAndCountAll({ 

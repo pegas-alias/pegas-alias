@@ -3,7 +3,7 @@ import { ActiveTeam, GameSettings} from '../../../types/game';
 import { Team } from '../../../types/leaders';
 import { deleteByValue } from '../../../utils/deleteFromArrayByValue';
 import { WritableDraft } from "immer/dist/internal";
-import { getTeamsApi } from './gameThunk';
+import { getTeamsApi, addTeamsApi, deleteTeamsApi } from './gameThunk';
 
 const initialState: GameSettings = {
   activeTeams: [],
@@ -90,6 +90,12 @@ const gameSettingsSlice = createSlice({
       .addCase(getTeamsApi.fulfilled, (state, action) => {
         state.status = 'resolved'
         state.playedTeams = action.payload.rows
+      })
+      .addCase(addTeamsApi.fulfilled, (state) => {
+        state.status = 'updated'
+      })
+      .addCase(deleteTeamsApi.fulfilled, (state) => {
+        state.status = 'updated'
       })
   }
 })

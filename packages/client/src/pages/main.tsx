@@ -19,6 +19,7 @@ export const Main: React.FC = (): JSX.Element => {
       'status':'',
       'limit': 100
     } 
+    // TODO 0 - state.player_id
     dispatch(getTeamsApi(initialStateFilter))
     playStartSound()
     const params = new URLSearchParams(location.search)
