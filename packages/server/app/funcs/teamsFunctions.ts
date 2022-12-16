@@ -23,13 +23,13 @@ export async function getTeamById(id: number) {
 
 // Получить все команды
 export async function getAllTeams(props: pager) {
-  let { offset, limit, player_id } = props
-  if (player_id == void 0) { player_id = 0; }
+  const { offset, limit, player_id } = props;
+  const id = (player_id) ? player_id : 0;
   return Teams.findAndCountAll({
     offset: offset || 0,
     limit: limit || 10,
     order: [['teamName', 'DESC']],
-    where: { player_id: player_id }
+    where: { player_id: id }
   })
 }
 
