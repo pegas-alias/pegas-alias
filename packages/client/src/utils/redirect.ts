@@ -9,16 +9,18 @@ export const authorization = () => {
   const isAuth = useAuth();
   const navigate = useNavigate();
 
-  Cooldown = setTimeout(() => {
-    const pathname = window.location.pathname;
-    if (pathname === '/login' || pathname === '/sign-up') {
-      if (isAuth) {
-        navigate('/');
+  if (typeof window !== 'undefined') {
+    Cooldown = setTimeout(() => {
+      const pathname = window.location.pathname;
+      if (pathname === '/login' || pathname === '/sign-up') {
+        if (isAuth) {
+          navigate('/');
+        }
+      } else {
+        if (!isAuth) {
+          navigate('/login');
+        }
       }
-    } else {
-      if (!isAuth) {
-        navigate('/login');
-      }
-    }
-  }, 200);
+    }, 200);
+  }
 }
