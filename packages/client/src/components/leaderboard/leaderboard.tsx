@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useQueryParams } from '../../services/hooks/useQueryParams'
-import { useAppDispatch } from '../../services/hooks/useState'
+import { useAppDispatch } from '../../services/hooks'
 
 import { Button, RangeLine } from '../../components'
 import { getLeadersApi } from '../../services/store/leaders/'
@@ -10,6 +10,7 @@ import { FilterState } from '../../services/store/leaders/type'
 import { RootState } from '../../services/store/reducer'
 import { Team } from '../../types/leaders'
 import './leaderboard.scss'
+import { wordsDeclention } from '../../utils'
 
 export function Leaderboard() {
   const dispatch = useAppDispatch()
@@ -81,10 +82,10 @@ export function Leaderboard() {
               <span className='leaderboard__result-title'>{team.teamName}:</span>
               <div className='leaderboard__result-info'>
                 <span className='leaderboard__result-value'>
-                  {team.games} игр, {team.victories} побед
+                  {team.games} {wordsDeclention(team.games, ['игра', 'игры', 'игр'])}, {team.victories} {wordsDeclention(team.victories, ['победа', 'победы', 'побед'])}
                 </span>
                 <span className='leaderboard__result-value'>
-                  {team.words} слов
+                  {team.words} {wordsDeclention(team.words, ['слово', 'слова', 'слов'])}
                 </span>
               </div>
               <RangeLine

@@ -86,7 +86,7 @@ export function startApp() {
       Teams.create({
         teamName: 'Девчонки',
         victories: 25,
-        games: 10,
+        games: 25,
         words: 320,
         player_id: 0
       })
