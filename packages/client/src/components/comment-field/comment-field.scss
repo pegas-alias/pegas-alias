@@ -64,3 +64,12 @@
 .comment-field__send-btn {
   right: 9px;
 }
+
+@include down($mobile) {
+  .comment-field__sticker-btn,
+  .comment-field__send-btn {
+    width: 32px;
+    height: 30px;
+    top: 7px;
+  }
+}

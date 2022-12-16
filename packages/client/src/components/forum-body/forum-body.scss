@@ -23,3 +23,9 @@
   font-size: 16px;
   font-weight: 700;
 }
+
+@include down($mobile) {
+  .forum-body__footer {
+    font-size: 12px;
+  }
+}
