@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { UserInfo } from '../../../types/user';
+import { authorization } from '../../../utils';
 import { UserState } from './type';
 import { authLogout, changeProfile, getUserApi } from './userThunk';
 
@@ -40,7 +41,12 @@ const userSlice = createSlice({
         state.user = action.payload;
       })
       .addCase(authLogout.fulfilled, (state) => {
-        state.user = {...initialState.user};
+        state.user = initialState.user;
+        authorization();
+      })
+      .addCase(authLogout.rejected, (state) => {   
+        state.user = initialState.user;
+        authorization();
       })
   },
 })

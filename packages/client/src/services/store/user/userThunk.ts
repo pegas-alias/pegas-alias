@@ -20,7 +20,7 @@ export const changeProfile = createAsyncThunk(
 export const authLogout = createAsyncThunk(
   '/auth/logout',
   async function () {
-    const response = await logoutUser;
+    const response = await logoutUser();
     return response;
   }
 )
