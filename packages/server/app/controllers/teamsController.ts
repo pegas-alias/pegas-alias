@@ -30,6 +30,7 @@ export const createNewTeam = async (req: Request, res: Response) => {
     })
   }, res, 'Что-то пошло не так');
 }
+
 // Удалить команду
 export const deleteTeamById = async (req: Request, res: Response) => {
   const { id } = req.params
@@ -37,7 +38,8 @@ export const deleteTeamById = async (req: Request, res: Response) => {
     return teamFunctions.deleteTeamById(Number(id))
   }, res, 'Что-то пошло не так')
 }
-// Получить список TOP 10
+
+// Получить список TOP 20
 export const getLeaderBoard = async (req: Request, res: Response) => {
   await processResult(() => {
     return teamFunctions.getLeaderBoard(req.query)

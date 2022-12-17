@@ -31,7 +31,7 @@ export async function getAllTeams(props: pager) {
   const id = (player_id) ? player_id : 0;
   return Teams.findAndCountAll({
     offset: offset || 0,
-    limit: limit || 10,
+    limit: limit || 20,
     order: [['teamName', 'DESC']],
     where: { player_id: id }
   })
@@ -39,12 +39,11 @@ export async function getAllTeams(props: pager) {
 
 // Получение списка ТОР 10 
 export async function getLeaderBoard(props: pager) {
-  console.log(props)
   const { offset, limit, ratingFieldName } = props
   return Teams.findAndCountAll({ 
     offset: offset || 0,
-    limit: limit || 10,
-    order: [[ratingFieldName!, 'DESC']],
+    limit: limit || 20,
+    order: [[ratingFieldName ? ratingFieldName : 'victories', 'DESC']],
   })
 }
 

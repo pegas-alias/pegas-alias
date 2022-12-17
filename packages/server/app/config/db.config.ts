@@ -77,10 +77,10 @@ export function startApp() {
         player_id: 0
       })
       Teams.create({
-        teamName: 'Астронафты',
+        teamName: 'Астронавты',
         victories: 15,
         games: 100,
-        words: 32,
+        words: 1923,
         player_id: 0
       })
       Teams.create({

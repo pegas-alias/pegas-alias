@@ -21,7 +21,7 @@ export function Leaderboard() {
   const initialStateFilter: FilterState = {
     'ratingFieldName': queryFilter,
     'cursor': queryPage,
-    'limit': 10
+    'limit': 20
   }
   const [filter, setFilter] = useState(initialStateFilter)
   const leaders: Array<Team> = useSelector((state: RootState) => state.leaders.leaders)

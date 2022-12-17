@@ -12,7 +12,7 @@ teamsRouter.delete('/:id', deleteTeamById)
 // Получение всех команд
 teamsRouter.get('/', getTeams)
 
-// Получение Списка ТОР 10
+// Получение Списка ТОР 20
 teamsRouter.get('/leaderboard', getLeaderBoard)
 
 export default teamsRouter;
