@@ -28,7 +28,7 @@ export async function toggleTheme(id: number) {
     else {
       user.theme = userTheme.DARK
     }
+    user.save()
   }
-  user?.save()
   return user
 }
