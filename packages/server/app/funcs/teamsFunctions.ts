@@ -4,6 +4,7 @@ import { Teams } from '../config/db.config'
 type pager = {
   offset?: number
   limit?: number
+  ratingFieldName?: string
   player_id?: number
 }
 
@@ -38,11 +39,12 @@ export async function getAllTeams(props: pager) {
 
 // Получение списка ТОР 10 
 export async function getLeaderBoard(props: pager) {
-  const { offset, limit } = props
+  console.log(props)
+  const { offset, limit, ratingFieldName } = props
   return Teams.findAndCountAll({ 
     offset: offset || 0,
     limit: limit || 10,
-    order: [['words', 'DESC']],
+    order: [[ratingFieldName!, 'DESC']],
   })
 }
 

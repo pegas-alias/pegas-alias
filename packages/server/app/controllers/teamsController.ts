@@ -40,6 +40,6 @@ export const deleteTeamById = async (req: Request, res: Response) => {
 // Получить список TOP 10
 export const getLeaderBoard = async (req: Request, res: Response) => {
   await processResult(() => {
-    return teamFunctions.getLeaderBoard({ ...req.body })
+    return teamFunctions.getLeaderBoard(req.query)
   }, res, 'Что-то пошло не так');
 }
