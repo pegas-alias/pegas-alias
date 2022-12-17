@@ -9,6 +9,9 @@ type pager = {
 
 // Создание команды
 export async function createNewTeam(props: ITeam) {
+  if (!props.player_id) {
+    props.player_id = 0;
+  }
   return Teams.create({ ...props })
 }
 

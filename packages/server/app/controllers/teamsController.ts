@@ -19,10 +19,10 @@ export const getTeamById = async (req: Request, res: Response) => {
 
 // Создать новую команду
 export const createNewTeam = async (req: Request, res: Response) => {
-  const { name, victories, games, words, player_id } = req.body
+  const { teamName, victories, games, words, player_id } = req.body.params
   await processResult(() => {
     return teamFunctions.createNewTeam({
-      teamName: name,
+      teamName: teamName,
       victories: Number(victories),
       games: Number(games),
       words: Number(words),
