@@ -9,6 +9,7 @@ import { signInYaOAuth } from '../services/http/login'
 import { getUserApi } from '../services/store/user'
 import { getTeamsApi } from '../services/store/game'
 import { FilterState } from '../services/store/game/type'
+import { authorization } from '../utils'
 
 export const Main: React.FC = (): JSX.Element => {
   if (typeof window !== 'undefined') {
@@ -37,6 +38,7 @@ export const Main: React.FC = (): JSX.Element => {
       }
     }, [code])
   }
+  authorization();
     return (
     <main>
       <Intro />
