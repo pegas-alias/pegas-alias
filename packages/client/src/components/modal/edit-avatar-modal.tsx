@@ -33,40 +33,44 @@ export function EditAvatarModal(props: IModal) {
     }
     changeFileName(fileObj.name)
   }
- 
+
   const dispatch = useAppDispatch()
 
-const handleChangeAvatar = () => {
-  if(inputRef !== null) {
-    if(inputRef.current !== null)  {
-      if(inputRef.current.files !== null) {
-        if(inputRef.current.files[0] !== null) {
-          const formData = new FormData();
-          formData.append('file', inputRef.current.files[0]);
-          changeProfileAvatarAPI(formData)
-          .then((res) => {
-            if(res) {
-              dispatch(getUserApi())
-                close()
-            }
-          })
-          .catch(e => console.log(e))
+  const handleChangeAvatar = () => {
+    if (inputRef !== null) {
+      if (inputRef.current !== null) {
+        if (inputRef.current.files !== null) {
+          if (inputRef.current.files[0] !== null) {
+            const formAvatar = document.getElementById('ChangeAvatarForm') as HTMLFormElement;
+            const formData = new FormData(formAvatar);
+            changeProfileAvatarAPI(formData)
+              .then((res) => {
+                if (res) {
+                  dispatch(getUserApi())
+                  props.close()
+                }
+              })
+              .catch(e => console.log(e))
+          }
         }
       }
     }
+
   }
-  
-}
   return (
     <Modal isOpen={props.isOpen} close={props.close}>
-      
+
       <h1 className="avatar__title">Поменять аватар</h1>
-      <input
-        style={{ display: 'none' }}
-        ref={inputRef}
-        type="file"
-        onChange={handleFileChange}
-      />
+      <form id='ChangeAvatarForm'>
+        <input
+          style={{ display: 'none' }}
+          ref={inputRef}
+          type="file"
+          name="avatar"
+          onChange={handleFileChange}
+        />
+      </form>
+
 
       <Button
         events={{
@@ -77,10 +81,10 @@ const handleChangeAvatar = () => {
         text="Выберите файл"
       />
       <Button classes="mb-28" text="Сохранить" events={{
-          onClick: handleChangeAvatar,
-        }}/>
+        onClick: handleChangeAvatar,
+      }} />
       <p>{name ?? 'Файл не выбран'}</p>
-     
+
     </Modal>
   )
 }

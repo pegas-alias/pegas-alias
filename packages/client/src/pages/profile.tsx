@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '../services/hooks';
 
 import { FormField, Button, Avatar, BackLink } from '../components';
 
-import { errorToString, pattern } from '../utils';
+import { authorization, errorToString, pattern } from '../utils';
 import './../scss/form/form.scss';
 import { UserInfo } from '../types/user';
 import { authLogout, changeProfile } from '../services/store/user';
@@ -38,6 +38,7 @@ export const Profile: React.FC = (): JSX.Element => {
     dispatch(changeProfile(data));
   }
 
+  authorization();
   return (
     <>
       <header>

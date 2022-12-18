@@ -7,6 +7,7 @@ import playStartSound from '../services/browser-api/web-audio-api'
 import { useAppDispatch } from '../services/hooks/useState'
 import { signInYaOAuth } from '../services/http/login'
 import { getUserApi } from '../services/store/user'
+import { authorization } from '../utils'
 
 export const Main: React.FC = (): JSX.Element => {
   if (typeof window !== 'undefined') {
@@ -26,6 +27,7 @@ export const Main: React.FC = (): JSX.Element => {
       }
     }, [code])
   }
+  authorization();
     return (
     <main>
       <Intro />
