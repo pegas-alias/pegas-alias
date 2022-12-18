@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Provider } from 'react-redux'
 import store from './services/store/reducer'
-import { useAppDispatch } from './services/hooks';
+import { useAppDispatch, useAppSelector } from './services/hooks';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import {
   Main,
@@ -25,13 +25,44 @@ import { AppSettings } from './components'
 
 import './scss/style.scss';
 import { getUserApi } from './services/store/user';
+import { UserInfo } from './types/user';
+import { createUser, getThemeByIdUser, toggleTheme } from './services/http/theme';
 
 export const App: React.FC = () => {
 //  export default function App() {
   const dispatch = useAppDispatch();
+  const user: UserInfo = useAppSelector(state => state.user.user);
   useEffect(() => {
     dispatch(getUserApi());
   }, [dispatch]);
+
+  useEffect(() => {
+    if(user.id>0) {
+      getThemeByIdUser(user.id)
+      .then((res) => {
+        if(res) {
+          if(res.theme === 'LIGHT' && document.body.classList.contains('theme-dark')) {
+            document.body.classList.toggle('theme-dark')
+          }
+          if(res.theme === 'DARK' && !document.body.classList.contains('theme-dark')) {
+            document.body.classList.toggle('theme-dark')
+          }
+        }
+        else {
+          createUser(user.id)
+          .then((res) => {
+            if(document.body.classList.contains('theme-dark')) {
+              toggleTheme(res.author_id)
+                .then(res => console.log(res))
+                .catch(e => console.log(e))
+            }
+          })
+          .catch((e) => console.log(e))
+        }
+      })
+      .catch((e) => console.log(e))
+    }
+  }, [user.id])
 
   // Set correct app min-height on mobile for existing browser address bar
   const calcAppHeight = () => {
