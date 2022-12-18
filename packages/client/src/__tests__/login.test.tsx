@@ -1,10 +1,12 @@
 import React from 'react';
+import { Provider } from 'react-redux'
 import { render, fireEvent, act, Matcher, SelectorMatcherOptions } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import { Login } from '../pages/login';
+import { Login } from '../pages';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
+import store from '../services/store/reducer'
 
 let getByText: ((id: Matcher, options?: SelectorMatcherOptions | undefined) => HTMLElement);
 jest.mock('../services/http/login', () => {
@@ -59,9 +61,11 @@ describe('Login', () => {
     act(() => {
       render(
         <BrowserRouter>
-          <Routes>
-            <Route path="*" element={<Login />} />
-          </Routes>
+          <Provider store={store}>
+            <Routes>
+              <Route path="*" element={<Login />} />
+            </Routes>
+          </Provider>
         </BrowserRouter>);
     });
     const regBtn: Element | null = document.querySelector('[title="Ещё нет аккаунта ?"]');
