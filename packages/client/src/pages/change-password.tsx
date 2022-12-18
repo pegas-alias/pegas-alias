@@ -20,7 +20,9 @@ export const ChangePassword: React.FC = (): JSX.Element => {
     watch,
     formState: { errors },
     handleSubmit,
-  } = useForm({ mode: 'onBlur' })
+  } = useForm<Record<string, string>>({ 
+    mode: 'onBlur'
+  })
 
   const passwordField = useRef({})
   passwordField.current = watch('newPassword', '')

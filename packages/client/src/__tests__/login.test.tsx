@@ -41,9 +41,11 @@ describe('Login', () => {
     act(() => {
       render(
         <BrowserRouter>
-          <Routes>
-            <Route path="*" element={<Login />} />
-          </Routes>
+          <Provider store={store}>
+            <Routes>
+              <Route path="*" element={<Login />} />
+            </Routes>
+          </Provider>
         </BrowserRouter>);
     });
 
