@@ -2,7 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux'
 import { render, fireEvent, act, Matcher, SelectorMatcherOptions } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import { Login } from '../pages';
+import { Login } from '../pages/login';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
@@ -26,7 +26,14 @@ mock.onPost('https://ya-praktikum.tech/api/v2/auth/signin').reply(200, data);
 describe('Login', () => {
   it('тест текст <Login>', () => {
     act(() => {
-      const renderOut = render(<Login />);
+      const renderOut = render(
+        <BrowserRouter>
+          <Provider store={store}>
+            <Routes>
+              <Route path="*" element={<Login />} />
+            </Routes>
+          </Provider>
+        </BrowserRouter>);
       getByText = renderOut.getByText;
     });
     expect(getByText('Вход в систему')).toBeInTheDocument();
@@ -34,7 +41,14 @@ describe('Login', () => {
 
   it('click Login', async () => {
     act(() => {
-      render(<Login />);
+      render(
+        <BrowserRouter>
+          <Provider store={store}>
+            <Routes>
+              <Route path="*" element={<Login />} />
+            </Routes>
+          </Provider>
+        </BrowserRouter>);
     });
 
     const authBtn: Element | null = document.querySelector('[title="Авторизоваться"]');
@@ -49,7 +63,14 @@ describe('Login', () => {
 
   it('click Registration', () => {
     act(() => {
-      render(<Login />);
+      render(
+        <BrowserRouter>
+          <Provider store={store}>
+            <Routes>
+              <Route path="*" element={<Login />} />
+            </Routes>
+          </Provider>
+        </BrowserRouter>);
     });
     const regBtn: Element | null = document.querySelector('[title="Ещё нет аккаунта ?"]');
     act(() => {
