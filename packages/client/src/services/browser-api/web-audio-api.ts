@@ -1,7 +1,7 @@
 let context: AudioContext;
 
 if (typeof window !== 'undefined') {
-  context = new (AudioContext || (window as any).webkitAudioContext)();
+  context = new AudioContext();
 }
 
 const playNote = (frequency: number, startTime: number, duration: number) => {
