@@ -10,9 +10,7 @@ export function ThemeBtn() {
   function handleClick(): void {
     document.body.classList.toggle('theme-dark');
     if(user.id>0) {
-      toggleTheme(user.id)
-      .then((res) => console.log(res))
-      .catch((e) => console.log(e))
+      toggleTheme(user.id);
     }
   }
 

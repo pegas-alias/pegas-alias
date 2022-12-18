@@ -52,9 +52,7 @@ export const App: React.FC = () => {
           createUser(user.id)
           .then((res) => {
             if(document.body.classList.contains('theme-dark')) {
-              toggleTheme(res.data.author_id)
-                .then(res => console.log(res))
-                .catch(e => console.log(e))
+              toggleTheme(res.data.author_id);
             }
           })
           .catch((e) => console.log(e))
