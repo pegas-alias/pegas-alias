@@ -40,11 +40,11 @@ export const App: React.FC = () => {
     if(user.id>0) {
       getThemeByIdUser(user.id)
       .then((res) => {
-        if(res.data) {
-          if(res.data.theme === 'LIGHT' && document.body.classList.contains('theme-dark')) {
+        if(res) {
+          if(res.theme === 'LIGHT' && document.body.classList.contains('theme-dark')) {
             document.body.classList.toggle('theme-dark')
           }
-          if(res.data.theme === 'DARK' && !document.body.classList.contains('theme-dark')) {
+          if(res.theme === 'DARK' && !document.body.classList.contains('theme-dark')) {
             document.body.classList.toggle('theme-dark')
           }
         }

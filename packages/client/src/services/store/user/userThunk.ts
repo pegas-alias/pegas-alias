@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { UserInfo } from '../../../types/user';
-import { logoutUser } from '../../http/login';
-import { changeProfileAPI, getUserAPI } from '../../http/profile';
+import { UserInfo } from '../../../types/user'
+import { logoutUser } from '../../http/login'
+import { changeProfileAPI, getUserAPI } from '../../http/profile'
 
 export const getUserApi = createAsyncThunk(
   'user/getUserApi',
@@ -20,7 +20,6 @@ export const changeProfile = createAsyncThunk(
 export const authLogout = createAsyncThunk(
   '/auth/logout',
   async function () {
-    const response = await logoutUser();
-    return response;
+    return await logoutUser();
   }
 )

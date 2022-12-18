@@ -19,10 +19,10 @@ export const toggleTheme = async (req: Request, res: Response) => {
 }
 // Создать пользователя
 export const createUser = async (req: Request, res: Response) => {
-  const { author_id } = req.body
+  const { id } = req.body
   await processResult(() => {
     return userFunctions.createUser ({
-      author_id: Number(author_id)   
+      author_id: Number(id)   
     })
   }, res, 'Что-то пошло не так');
 }

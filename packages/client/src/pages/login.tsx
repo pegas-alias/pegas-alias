@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { FormField, Button, Intro } from '../components'
 import { LOCAL_URL } from '../constants'
-import { useAppDispatch } from '../services/hooks/useState'
+import { useAppDispatch } from '../services/hooks'
 import { loginUser, signUpYaOAuth } from '../services/http/login'
 import { getUserApi } from '../services/store/user'
 import { authorization, ErrorMessage, errorToString, pattern } from '../utils'

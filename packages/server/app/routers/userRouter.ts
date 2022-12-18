@@ -4,12 +4,12 @@ import { getThemeByIdUser, createUser, toggleTheme } from '../controllers/userCo
 const router = express.Router();
 
 // Получение пользователя
-router.get('user/:id', getThemeByIdUser)
+router.get('/:id', getThemeByIdUser)
 
 // Переключение темы по Id пользователя
-router.get('theme/:id', toggleTheme)
+router.get('/theme/:id', toggleTheme)
 
 // Создание нового пользователя
-router.post('user/', createUser)
+router.post('/', createUser)
 
 export default router;

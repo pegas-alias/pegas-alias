@@ -15,6 +15,7 @@ import { render } from '../client/dist/ssr/entry-server.cjs'
 import topicsRouter from './app/routers/topicsRouter'
 import commentsRouter from './app/routers/commentsRouter'
 import likesRouter from './app/routers/likesRouter'
+import userRouter from './app/routers/userRouter'
 
 
 function escapeHtml(string: string): string {
@@ -41,6 +42,7 @@ export async function createServer(
   app.use('/api/topics', topicsRouter)
   app.use('/api/comments', commentsRouter)
   app.use('/api/likes', likesRouter)
+  app.use('/api/user', userRouter)
 
   let template:string;
 

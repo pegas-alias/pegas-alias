@@ -12,7 +12,7 @@ export const getThemeByIdUser = (id: number) => {
 
 export const toggleTheme = (id: number) => {
   return serverInstance
-    .get(`/api/theme/${id.toString()}`)
+    .get(`/api/user/theme/${id.toString()}`)
     .then(response => response.data)
     .catch(error => {
       console.log(error)
