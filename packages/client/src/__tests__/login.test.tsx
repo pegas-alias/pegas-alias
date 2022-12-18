@@ -29,7 +29,7 @@ describe('Login', () => {
       const renderOut = render(
         <BrowserRouter>
           <Routes>
-            <Route path="*" element={<Login />} />
+            <Route path="/login" element={<Login />} />
           </Routes>
         </BrowserRouter>);
       getByText = renderOut.getByText;
@@ -43,7 +43,7 @@ describe('Login', () => {
         <BrowserRouter>
           <Provider store={store}>
             <Routes>
-              <Route path="*" element={<Login />} />
+              <Route path="/login" element={<Login />} />
             </Routes>
           </Provider>
         </BrowserRouter>);
@@ -65,7 +65,7 @@ describe('Login', () => {
         <BrowserRouter>
           <Provider store={store}>
             <Routes>
-              <Route path="*" element={<Login />} />
+              <Route path="/login" element={<Login />} />
             </Routes>
           </Provider>
         </BrowserRouter>);

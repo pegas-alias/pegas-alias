@@ -16,11 +16,11 @@ describe('Register', () => {
     act(() => {
       const { rerender } = render(
         <BrowserRouter>
-            <Provider store={store}>
+          <Provider store={store}>
             <Routes>
-              <Route path="*" element={<SignUp />} />
+              <Route path="/sign-up" element={<SignUp />} />
             </Routes>
-          </Provider>
+        </Provider>
         </BrowserRouter>);
       ReRender = rerender;
     });
@@ -30,7 +30,7 @@ describe('Register', () => {
     });
     ReRender(<BrowserRouter>
       <Routes>
-        <Route path="*" element={<SignUp />} />
+        <Route path="/sign-up" element={<SignUp />} />
       </Routes>
     </BrowserRouter>);
     screen.debug();screen.findAllByText('Заполните поле');
@@ -42,7 +42,7 @@ describe('Register', () => {
       render(
         <BrowserRouter>
           <Routes>
-            <Route path="*" element={<SignUp />} />
+            <Route path="/sign-up" element={<SignUp />} />
           </Routes>
         </BrowserRouter>);
     });
