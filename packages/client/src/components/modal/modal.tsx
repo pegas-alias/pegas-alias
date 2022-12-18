@@ -15,10 +15,11 @@ export const Modal: React.FC<IModal> = ({
   close,
   classes
 }: IModal): JSX.Element => {
+  const getActiveClasses = () => classes ? 'modal modal--open ' + classes : 'modal modal--open'
   return (
     <>
       {isOpen && (
-        <div className={classes ? 'modal modal--open ' + classes : 'modal modal--open'}>
+        <div className={getActiveClasses()}>
           <div className="modal__overlay" onClick={close}></div>
           <div className="modal__body">
             <span className="modal__close" onClick={close} />
