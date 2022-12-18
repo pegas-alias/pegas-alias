@@ -161,8 +161,8 @@ export const Profile: React.FC = (): JSX.Element => {
               text="Выйти из аккаунта"
               events={{
                 onClick: () => { 
-                  dispatch(authLogout())
-                  navigate('/login')
+                  dispatch(authLogout());
+                  navigate('/login');
                 } 
               }}
             />

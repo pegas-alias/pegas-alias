@@ -3,15 +3,13 @@ import { useNavigate } from 'react-router-dom'
 import { Intro } from '../components'
 import { ButtonsNavigation } from '../components/buttons-navigation/buttons-navigation'
 import { LOCAL_URL } from '../constants'
-import playStartSound from '../services/browser-api/web-audio-api'
-import { useAppDispatch } from '../services/hooks/useState'
+import { useAppDispatch } from '../services/hooks'
 import { signInYaOAuth } from '../services/http/login'
 import { getUserApi } from '../services/store/user'
 import { authorization } from '../utils'
 
 export const Main: React.FC = (): JSX.Element => {
   if (typeof window !== 'undefined') {
-    playStartSound()
     const params = new URLSearchParams(location.search)
     const code = params.get('code')
     const dispatch = useAppDispatch()

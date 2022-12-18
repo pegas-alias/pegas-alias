@@ -1,8 +1,10 @@
 import React, { JSXElementConstructor, ReactElement } from 'react';
+import { Provider } from 'react-redux'
 import { render, fireEvent, screen, act } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { SignUp } from '../pages/sign-up';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import store from '../services/store/reducer'
 
 describe('Register', () => {
 
@@ -14,9 +16,11 @@ describe('Register', () => {
     act(() => {
       const { rerender } = render(
         <BrowserRouter>
-          <Routes>
-            <Route path="*" element={<SignUp />} />
-          </Routes>
+          <Provider store={store}>
+            <Routes>
+              <Route path="*" element={<SignUp />} />
+            </Routes>
+        </Provider>
         </BrowserRouter>);
       ReRender = rerender;
     });
@@ -25,9 +29,11 @@ describe('Register', () => {
       fireEvent.click(regBtn!);
     });
     ReRender(<BrowserRouter>
-      <Routes>
-        <Route path="*" element={<SignUp />} />
-      </Routes>
+      <Provider store={store}>
+        <Routes>
+          <Route path="*" element={<SignUp />} />
+        </Routes>
+      </Provider>
     </BrowserRouter>);
     screen.debug();screen.findAllByText('Заполните поле');
   });
@@ -37,9 +43,11 @@ describe('Register', () => {
     act(() => {
       render(
         <BrowserRouter>
-          <Routes>
-            <Route path="*" element={<SignUp />} />
-          </Routes>
+          <Provider store={store}>
+            <Routes>
+              <Route path="*" element={<SignUp />} />
+            </Routes>
+          </Provider>
         </BrowserRouter>);
     });
     const authBtn = document.querySelector('[title="Уже есть аккаунт ?"]');

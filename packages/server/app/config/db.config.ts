@@ -3,6 +3,7 @@ import { Sequelize } from 'sequelize-typescript'
 import { topicModel } from '../models/topicModel'
 import { commentModel } from '../models/commentModel'
 import { likeModel } from '../models/likeModel'
+import { userModel } from '../models/userModel'
 
 const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT, POSTGRES_1_PORT_5432_TCP_ADDR } =
   process.env
@@ -34,13 +35,15 @@ export const Comments = sequelize.define(
     tableName: 'comments',
     initialAutoIncrement: '1000'
   })
-export const Like = sequelize.define(
-  'Like',
-  likeModel,
-  {
-    tableName: 'like',
-    initialAutoIncrement: '100000'
-  })
+export const Like = sequelize.define('Like', likeModel, {
+  tableName: 'like',
+  initialAutoIncrement: '100000',
+})
+
+export const User = sequelize.define('User', userModel, {
+  tableName: 'user',
+  initialAutoIncrement: '0',
+})
 
 Topics.hasMany(Comments, {foreignKey: 'topic_id'})
 
