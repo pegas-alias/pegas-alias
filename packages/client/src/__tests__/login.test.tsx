@@ -26,12 +26,7 @@ mock.onPost('https://ya-praktikum.tech/api/v2/auth/signin').reply(200, data);
 describe('Login', () => {
   it('тест текст <Login>', () => {
     act(() => {
-      const renderOut = render(
-        <BrowserRouter>
-          <Routes>
-            <Route path="/login" element={<Login />} />
-          </Routes>
-        </BrowserRouter>);
+      const renderOut = render(<Login />);
       getByText = renderOut.getByText;
     });
     expect(getByText('Вход в систему')).toBeInTheDocument();
@@ -39,14 +34,7 @@ describe('Login', () => {
 
   it('click Login', async () => {
     act(() => {
-      render(
-        <BrowserRouter>
-          <Provider store={store}>
-            <Routes>
-              <Route path="/login" element={<Login />} />
-            </Routes>
-          </Provider>
-        </BrowserRouter>);
+      render(<Login />);
     });
 
     const authBtn: Element | null = document.querySelector('[title="Авторизоваться"]');
@@ -61,14 +49,7 @@ describe('Login', () => {
 
   it('click Registration', () => {
     act(() => {
-      render(
-        <BrowserRouter>
-          <Provider store={store}>
-            <Routes>
-              <Route path="/login" element={<Login />} />
-            </Routes>
-          </Provider>
-        </BrowserRouter>);
+      render(<Login />);
     });
     const regBtn: Element | null = document.querySelector('[title="Ещё нет аккаунта ?"]');
     act(() => {

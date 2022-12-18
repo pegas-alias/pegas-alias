@@ -14,37 +14,21 @@ describe('Register', () => {
       // type global Rerender
     };
     act(() => {
-      const { rerender } = render(
-        <BrowserRouter>
-          <Provider store={store}>
-            <Routes>
-              <Route path="/sign-up" element={<SignUp />} />
-            </Routes>
-        </Provider>
-        </BrowserRouter>);
+      const { rerender } = render(<SignUp />);
       ReRender = rerender;
     });
     const regBtn = document.querySelector('[title="Создать аккаунт"]');
     act(() => {
       fireEvent.click(regBtn!);
     });
-    ReRender(<BrowserRouter>
-      <Routes>
-        <Route path="/sign-up" element={<SignUp />} />
-      </Routes>
-    </BrowserRouter>);
+    ReRender(<SignUp />);
     screen.debug();screen.findAllByText('Заполните поле');
   });
 
 
   it('click Authorization', () => {
     act(() => {
-      render(
-        <BrowserRouter>
-          <Routes>
-            <Route path="/sign-up" element={<SignUp />} />
-          </Routes>
-        </BrowserRouter>);
+      render(<SignUp />);
     });
     const authBtn = document.querySelector('[title="Уже есть аккаунт ?"]');
     act(() => {
