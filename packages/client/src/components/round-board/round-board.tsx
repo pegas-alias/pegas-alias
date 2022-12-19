@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Button, SelectTeamModal } from '../../components/'
 import './round-board.scss'
 import { useDispatch } from 'react-redux';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { GameProcess, GameSettings, RoundWord } from '../../types/game';
 import { useAppSelector, useToggle } from '../../services/hooks';
@@ -27,10 +28,39 @@ import crossIcon from './../../assets/images/cross-red.svg';
 import deleteIcon from './../../assets/images/trash-gray.svg';
 import { WordExplanationModal } from '../modal/word-explanation-modal';
 import { getPublicData } from '../../services/http/game';
+import { Team } from '../../types/leaders';
 
 const nullTeamValue = 'Никто';
 const explanationTestWord = 'машина';
 const DESC_API_PATH = '/api/v1/desc/';
+
+type GetUsersResponse = {
+  data: string;
+};
+          
+async function updateTeam(team:Team) {
+  try {
+    const { data } = await axios.post<GetUsersResponse>(
+      '/api/teams/update/',
+      team,
+      {
+        headers: {
+          Accept: 'application/json',
+        },
+      },
+    );
+    return data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.log('error message: ', error.message);
+      return error.message;
+    } else {
+      console.log('unexpected error: ', error);
+      return 'An unexpected error occurred';
+    }
+  }
+}
+
 
 export const RoundBoard: React.FC = () => {
   const dispatch = useDispatch();
@@ -138,9 +168,18 @@ export const RoundBoard: React.FC = () => {
           if (index === process.activeTeamIndex) {
             score += process.roundScore;
           }
+
+          updateTeam({
+            "teamName":team.name,
+            "games": 1,
+            "victories": (team.name == maxScoreTeam.name) ? 1 : 0,
+            "team_id": 0,
+            "words": score
+            }
+          );
+          
           endGameScore += score + ' : '
         })
-        
         dispatch(setWinner(maxScoreTeam.name));
         dispatch(changeEndGameScore(endGameScore.slice(0, -2)));
         dispatch(clearGameProcess());

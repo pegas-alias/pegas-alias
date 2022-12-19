@@ -31,6 +31,13 @@ export const createNewTeam = async (req: Request, res: Response) => {
   }, res, 'Что-то пошло не так');
 }
 
+export const updateTeams = async (req: Request, res: Response) => {
+  const { teamName, words, victories } = req.body
+  await processResult(() => {
+    return teamFunctions.updateTeams( teamName, words, victories )
+  }, res, 'Что-то пошло не так');
+}
+
 // Удалить команду
 export const deleteTeamById = async (req: Request, res: Response) => {
   const { id } = req.params

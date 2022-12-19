@@ -66,106 +66,36 @@ export async function dbConnect() {
   }
 }
 
-export function startApp() {
+export function startApp(player_id:string) {
   dbConnect().then(
     () => {
       Teams.create({
-        teamName: 'Жульверн',
+        teamName: 'Цыплята',
         victories: 10,
-        games: 32,
-        words: 123,
-        player_id: 0
+        games: 30,
+        words: 100,
+        player_id: player_id
       })
       Teams.create({
-        teamName: 'Астронавты',
-        victories: 15,
-        games: 100,
-        words: 1923,
-        player_id: 0
+        teamName: 'Школьники',
+        victories: 20,
+        games: 40,
+        words: 200,
+        player_id: player_id
       })
       Teams.create({
-        teamName: 'Девчонки',
-        victories: 25,
-        games: 25,
-        words: 320,
-        player_id: 0
+        teamName: 'Студенты',
+        victories: 40,
+        games: 50,
+        words: 400,
+        player_id: player_id
       })
       Teams.create({
-        teamName: 'Мальчики',
-        victories: 3,
-        games: 12,
-        words: 33,
-        player_id: 0
-      })
-      Teams.create({
-        teamName: 'Тюлени',
-        victories: 5,
-        games: 10,
-        words: 32,
-        player_id: 0
-      })
-      
-      Topics.create({
-        topic_id: 100001,
-        title: 'Жульверн',
-        question: 'Жужат ли жужилицы жучковые!?',
-        author_id: 1001,
-        author_name: 'Жучара'
-      })
-      Topics.create({
-        topic_id: 100002,
-        title: 'Спасибо авторам игры',
-        question: 'Это же самый топ оф зе топ оф зе топ из всех игр',
-        author_id: 1002,
-        author_name: 'Рикардо'
-      })
-      Topics.create({
-        topic_id: 100003,
-        title: 'По факту',
-        question: 'Что по чит кодам, пацантре?',
-        author_id: 1003,
-        author_name: 'Читерило'
-      }).then( ()=> {
-        Comments.create({
-          comment_id: 100000001,
-          message: 'ты що, Вася, какие Читы??',
-          author_id: 1002,
-          author_name: 'Микоглай',
-          topic_id: 100003
-        }).then( ()=> {
-          Like.create({
-            like_id: 1000000001,
-            author_id: 1002,
-            comment_id: 100000001,
-            topic_id: 100003
-          })
-          Like.create({
-            like_id: 1000000002,
-            author_id: 1005,
-            comment_id: 100000001,
-            topic_id: 100003
-          })
-          Like.create({
-            like_id: 1000000003,
-            author_id: 1006,
-            comment_id: 100000001,
-            topic_id: 100003
-          })    
-        })
-        Comments.create({
-          comment_id: 100000002,
-          message: 'пароль - рыба - меч',
-          author_id: 1005,
-          author_name: 'Лол',
-          topic_id: 100003
-        })
-        Comments.create({
-          comment_id: 100000003,
-          message: 'да нет тут никаких читов',
-          author_id: 1006,
-          author_name: 'Мозг',
-          topic_id: 100003
-        })            
+        teamName: 'Эрудиты',
+        victories: 50,
+        games: 50,
+        words: 1000,
+        player_id: player_id
       })
     }
   )

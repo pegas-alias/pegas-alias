@@ -16,6 +16,26 @@ export async function createNewTeam(props: ITeam) {
   return Teams.create({ ...props })
 }
 
+// Обновление данных о команде
+export async function updateTeams (name:string, score:number, winner:string) {
+  const team = await Teams.findOne({
+    where: { 
+      teamName: name
+    }
+  })
+  console.log('server winner ', winner);
+  if (!team) {
+    return;
+  }
+  let updatedTeam = team.set({
+    games: team?.dataValues.games + 1,
+    victories: team?.dataValues.victories + Number(winner),
+    words: team?.dataValues.words + score
+ })
+ team.save();
+ return updatedTeam;
+}
+
 // Получение команды по Id
 export async function getTeamById(id: number) {
   return Teams.findOne({ 
