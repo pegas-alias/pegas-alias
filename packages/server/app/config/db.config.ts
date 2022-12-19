@@ -3,6 +3,7 @@ import { Sequelize } from 'sequelize-typescript'
 import { topicModel } from '../models/topicModel'
 import { commentModel } from '../models/commentModel'
 import { likeModel } from '../models/likeModel'
+import { teamModel } from '../models/teamModel'
 import { userModel } from '../models/userModel'
 
 const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT, POSTGRES_1_PORT_5432_TCP_ADDR } =
@@ -26,7 +27,8 @@ export const Topics = sequelize.define(
   {
     tableName: 'topics',
     initialAutoIncrement: '100'
-  })
+  }
+)
 
 export const Comments = sequelize.define(
   'Comments',
@@ -34,16 +36,35 @@ export const Comments = sequelize.define(
   {
     tableName: 'comments',
     initialAutoIncrement: '1000'
-  })
-export const Like = sequelize.define('Like', likeModel, {
-  tableName: 'like',
-  initialAutoIncrement: '100000',
-})
+  }
+)
 
-export const User = sequelize.define('User', userModel, {
-  tableName: 'user',
-  initialAutoIncrement: '0',
-})
+export const Like = sequelize.define(
+  'Like',
+  likeModel,
+  {
+    tableName: 'like',
+    initialAutoIncrement: '100000'
+  }
+)
+
+export const User = sequelize.define(
+  'User', 
+  userModel,
+  {
+    tableName: 'user',
+    initialAutoIncrement: '0',
+  }
+)
+
+export const Teams = sequelize.define(
+  'Teams',
+  teamModel,
+  {
+    tableName: 'teams',
+    initialAutoIncrement: '100'
+  }
+)
 
 Topics.hasMany(Comments, {foreignKey: 'topic_id'})
 
@@ -61,70 +82,78 @@ export async function dbConnect() {
   }
 }
 
-export function startApp() {
+export function startApp(player_id:string) {
   dbConnect().then(
     () => {
-      Topics.create({
-        topic_id: 100001,
-        title: 'Жульверн',
-        question: 'Жужат ли жужилицы жучковые!?',
-        author_id: 1001,
-        author_name: 'Жучара'
+      Teams.create({
+        teamName: 'Не звонят, а звонят',
+        victories: 0,
+        games: 10,
+        words: 10,
+        player_id: player_id
       })
-      Topics.create({
-        topic_id: 100002,
-        title: 'Спасибо авторам игры',
-        question: 'Это же самый топ оф зе топ оф зе топ из всех игр',
-        author_id: 1002,
-        author_name: 'Рикардо'
+      Teams.create({
+        teamName: 'Цыплята',
+        victories: 5,
+        games: 30,
+        words: 100,
+        player_id: player_id
       })
-      Topics.create({
-        topic_id: 100003,
-        title: 'По фасту',
-        question: 'Что по чит кодам, пацантре?',
-        author_id: 1003,
-        author_name: 'Читерило'
-      }).then( ()=> {
-        Comments.create({
-          comment_id: 100000001,
-          message: 'ты що, Вася, какие Читы??',
-          author_id: 1002,
-          author_name: 'Микоглай',
-          topic_id: 100003
-        }).then( ()=> {
-          Like.create({
-            like_id: 1000000001,
-            author_id: 1002,
-            comment_id: 100000001,
-            topic_id: 100003
-          })
-          Like.create({
-            like_id: 1000000002,
-            author_id: 1005,
-            comment_id: 100000001,
-            topic_id: 100003
-          })
-          Like.create({
-            like_id: 1000000003,
-            author_id: 1006,
-            comment_id: 100000001,
-            topic_id: 100003
-          })
-        })
-        Comments.create({
-          comment_id: 100000002,
-          message: 'пароль - рыба - меч',
-          author_id: 1005,
-          author_name: 'Лол',
-          topic_id: 100003
-        })
-        Comments.create({
-          comment_id: 100000003,
-          message: 'да нет тут никаких читов',
-          author_id: 1006,
-          author_name: 'Мозг',
-          topic_id: 100003
-        })
+      Teams.create({
+        teamName: 'Школоло',
+        victories: 10,
+        games: 40,
+        words: 200,
+        player_id: player_id
+      })
+      Teams.create({
+        teamName: 'Общага',
+        victories: 25,
+        games: 50,
+        words: 400,
+        player_id: player_id
+      })
+      Teams.create({
+        teamName: 'Девочки',
+        victories: 30,
+        games: 50,
+        words: 300,
+        player_id: player_id
+      })
+      Teams.create({
+        teamName: 'Пацаны',
+        victories: 30,
+        games: 50,
+        words: 300,
+        player_id: player_id
+      })
+      Teams.create({
+        teamName: 'Эрудиты',
+        victories: 45,
+        games: 60,
+        words: 500,
+        player_id: player_id
+      })
+      Teams.create({
+        teamName: 'Магистры',
+        victories: 55,
+        games: 70,
+        words: 800,
+        player_id: player_id
+      })
+      Teams.create({
+        teamName: 'Лингвомонстры',
+        victories: 75,
+        games: 80,
+        words: 1000,
+        player_id: player_id
+      })
+      Teams.create({
+        teamName: 'Сверхразумы',
+        victories: 100,
+        games: 100,
+        words: 1500,
+        player_id: player_id
       })
     }
   )

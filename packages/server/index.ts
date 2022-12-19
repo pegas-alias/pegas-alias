@@ -3,7 +3,6 @@ import path from 'node:path'
 import cors from 'cors'
 import bodyParser from 'body-parser'
 import express from 'express'
-import { startApp } from './app/config/db.config'
 import { createClientAndConnect } from './db'
 // импортируем работу с запросами для сервера
 import * as http from 'http'
@@ -15,6 +14,7 @@ import { render } from '../client/dist/ssr/entry-server.cjs'
 import topicsRouter from './app/routers/topicsRouter'
 import commentsRouter from './app/routers/commentsRouter'
 import likesRouter from './app/routers/likesRouter'
+import teamsRouter from './app/routers/teamsRouter'
 import userRouter from './app/routers/userRouter'
 
 
@@ -42,6 +42,10 @@ export async function createServer(
   app.use('/api/topics', topicsRouter)
   app.use('/api/comments', commentsRouter)
   app.use('/api/likes', likesRouter)
+  app.use('/api/teams', teamsRouter)
+// import { startApp } from './app/config/db.config'
+// заполняем команды соперники для нового игрока добавить в апи сохранения нового игрока
+// startApp(player_id)
   app.use('/api/user', userRouter)
 
   let template:string;
@@ -165,5 +169,5 @@ export async function createServer(
 }
 
 createServer().then( () => {
-  createClientAndConnect().then(() => startApp())
+  createClientAndConnect()
 })
