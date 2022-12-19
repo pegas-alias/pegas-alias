@@ -4,6 +4,7 @@ import { topicModel } from '../models/topicModel'
 import { commentModel } from '../models/commentModel'
 import { likeModel } from '../models/likeModel'
 import { teamModel } from '../models/teamModel'
+import { userModel } from '../models/userModel'
 
 const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT, POSTGRES_1_PORT_5432_TCP_ADDR } =
   process.env
@@ -26,7 +27,8 @@ export const Topics = sequelize.define(
   {
     tableName: 'topics',
     initialAutoIncrement: '100'
-  })
+  }
+)
 
 export const Comments = sequelize.define(
   'Comments',
@@ -34,22 +36,36 @@ export const Comments = sequelize.define(
   {
     tableName: 'comments',
     initialAutoIncrement: '1000'
-  })
+  }
+)
+
 export const Like = sequelize.define(
   'Like',
   likeModel,
   {
     tableName: 'like',
     initialAutoIncrement: '100000'
-  })
-  export const Teams = sequelize.define(
+  }
+)
+
+export const User = sequelize.define(
+  'User', 
+  userModel,
+  {
+    tableName: 'user',
+    initialAutoIncrement: '0',
+  }
+)
+
+export const Teams = sequelize.define(
   'Teams',
-  teamModel, 
+  teamModel,
   {
     tableName: 'teams',
     initialAutoIncrement: '100'
-  })
-  
+  }
+)
+
 Topics.hasMany(Comments, {foreignKey: 'topic_id'})
 
 Comments.hasMany(Comments, {foreignKey: 'bind_comment_id'})

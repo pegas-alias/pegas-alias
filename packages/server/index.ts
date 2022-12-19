@@ -15,6 +15,7 @@ import topicsRouter from './app/routers/topicsRouter'
 import commentsRouter from './app/routers/commentsRouter'
 import likesRouter from './app/routers/likesRouter'
 import teamsRouter from './app/routers/teamsRouter'
+import userRouter from './app/routers/userRouter'
 
 
 function escapeHtml(string: string): string {
@@ -45,6 +46,7 @@ export async function createServer(
 // import { startApp } from './app/config/db.config'
 // заполняем команды соперники для нового игрока добавить в апи сохранения нового игрока
 // startApp(player_id)
+  app.use('/api/user', userRouter)
 
   let template:string;
 

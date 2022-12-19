@@ -21,23 +21,23 @@ export const loginUser = async (data: Record<string, unknown>) => {
 }
 
 export const signUpYaOAuth = () => {
-  const result = apiInstance
+  return apiInstance
     .get('/oauth/yandex/service-id')
     .then(response => response.data)
     .catch(error => {
       console.log(error)
     })
-  return result
 }
+
 export const signInYaOAuth = (data: Record<string, unknown>) => {
-  const result = apiInstance
+  return apiInstance
     .post('/oauth/yandex', data)
     .then(response => response)
     .catch(error => {
       console.log(error)
     })
-  return result
 }
+
 export const logoutUser = async () => {
   return await apiInstance
     .post('/auth/logout')

@@ -3,8 +3,8 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
 import { FormField, Button, Intro } from '../components'
-import { LOCAL_URL } from '../constants'
-import { useAppDispatch } from '../services/hooks/useState'
+import { LOCAL_URL, OAUTH_CLIENT_ID } from '../constants'
+import { useAppDispatch } from '../services/hooks'
 import { loginUser, signUpYaOAuth } from '../services/http/login'
 import { getUserApi } from '../services/store/user'
 import { authorization, ErrorMessage, errorToString, pattern } from '../utils'
@@ -35,10 +35,9 @@ export const Login: React.FC = (): JSX.Element => {
   }
 
   const handleClick = () => {
-    signUpYaOAuth().then(result => {
-      const clientId = result.service_id
+    signUpYaOAuth().then(() => {
       window.location.replace(
-        `https://oauth.yandex.ru/authorize?response_type=code&client_id=${clientId}&redirect_uri=${LOCAL_URL}`
+        `https://oauth.yandex.ru/authorize?response_type=code&client_id=${OAUTH_CLIENT_ID}&redirect_uri=${LOCAL_URL}`
       )
     })
   }
@@ -88,7 +87,7 @@ export const Login: React.FC = (): JSX.Element => {
         <div className="form__buttons">
           <Button text="Авторизоваться" type="submit" />
           <Button
-            text="Авторизироваться через Яндекс"
+            text="Авторизоваться через Яндекс"
             type="button"
             events={{
               onClick: () => {

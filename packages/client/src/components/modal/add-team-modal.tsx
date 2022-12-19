@@ -28,8 +28,8 @@ export function AddTeamModal(props: IModal) {
         return activeTeam.name === playedTeam.teamName
       })
     })
-  }else{
-    playedTeams = [];
+  } else {
+    playedTeams = []
   }
   return (
     <Modal isOpen={props.isOpen} close={props.close}>

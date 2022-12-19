@@ -27,9 +27,13 @@ export const changePasswordAPI = (data: Record<string, unknown>) => {
     })
 }
 
-export const changeProfileAvatarAPI = (data: Record<string, unknown>) => {
+export const changeProfileAvatarAPI = (data: FormData) => {
   return apiInstance
-    .put('/user/profile/avatar', data)
+    .put('/user/profile/avatar', data,{
+      headers:{
+        'Content-Type':'multipart/form-data;'
+      }
+    })
     .then(response => response.data)
     .catch(error => {
       console.log(error)
