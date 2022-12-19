@@ -29,7 +29,6 @@ import { UserInfo } from './types/user';
 import { createUser, getThemeByIdUser, toggleTheme } from './services/http/theme';
 
 export const App: React.FC = () => {
-//  export default function App() {
   const dispatch = useAppDispatch();
   const user: UserInfo = useAppSelector(state => state.user.user);
   useEffect(() => {
@@ -37,22 +36,20 @@ export const App: React.FC = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if(user.id>0) {
+    if (user.id > 0) {
       getThemeByIdUser(user.id)
-      .then((res) => {
-        if(res) {
-          if(res.theme === 'LIGHT' && document.body.classList.contains('theme-dark')) {
-            document.body.classList.toggle('theme-dark')
-          }
-          if(res.theme === 'DARK' && !document.body.classList.contains('theme-dark')) {
-            document.body.classList.toggle('theme-dark')
-          }
-        }
-        else {
-          createUser(user.id)
-          .then((res) => {
-            if(document.body.classList.contains('theme-dark')) {
-              toggleTheme(res.data.author_id);
+        .then((res) => {
+          if (res) {
+            if (res.theme === 'LIGHT' && document.body.classList.contains('theme-dark')
+              || (res.theme === 'DARK' && !document.body.classList.contains('theme-dark'))
+            ) {
+              document.body.classList.toggle('theme-dark')
+            }
+          } else {
+            createUser(user.id)
+              .then((res) => {
+                if (document.body.classList.contains('theme-dark')) {
+                  toggleTheme(res.data.author_id);
             }
           })
           .catch((e) => console.log(e))
