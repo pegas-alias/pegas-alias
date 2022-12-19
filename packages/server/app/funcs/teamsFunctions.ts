@@ -27,7 +27,7 @@ export async function updateTeams (name:string, score:number, winner:string) {
   if (!team) {
     return;
   }
-  let updatedTeam = team.set({
+  const updatedTeam = team.set({
     games: team?.dataValues.games + 1,
     victories: team?.dataValues.victories + Number(winner),
     words: team?.dataValues.words + score
