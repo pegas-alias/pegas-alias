@@ -87,7 +87,7 @@ export const Login: React.FC = (): JSX.Element => {
         <div className="form__buttons">
           <Button text="Авторизоваться" type="submit" />
           <Button
-            text="Авторизироваться через Яндекс"
+            text="Авторизоваться через Яндекс"
             type="button"
             events={{
               onClick: () => {
