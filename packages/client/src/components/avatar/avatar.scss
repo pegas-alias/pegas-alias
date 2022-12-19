@@ -35,7 +35,13 @@
   margin-bottom: 28px;
 }
 
-.avatar__image{
+.avatar__image {
   border-radius: 50%;
+  height: 100%;
   overflow: hidden;
+  
+  img {
+    height: 100%;
+    object-fit: cover;
+  }
 }
