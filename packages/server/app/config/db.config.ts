@@ -108,6 +108,20 @@ export function startApp(player_id:string) {
       })
       Teams.create({
         teamName: 'Общага',
+        victories: 25,
+        games: 50,
+        words: 400,
+        player_id: player_id
+      })
+      Teams.create({
+        teamName: 'Девочки',
+        victories: 30,
+        games: 50,
+        words: 300,
+        player_id: player_id
+      })
+      Teams.create({
+        teamName: 'Пацаны',
         victories: 30,
         games: 50,
         words: 300,
@@ -115,7 +129,7 @@ export function startApp(player_id:string) {
       })
       Teams.create({
         teamName: 'Эрудиты',
-        victories: 40,
+        victories: 45,
         games: 60,
         words: 500,
         player_id: player_id
