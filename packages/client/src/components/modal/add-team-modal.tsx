@@ -3,8 +3,9 @@ import { Modal } from './modal'
 import { Team } from '../../types/leaders';
 import { wordsDeclention } from '../../utils';
 import { ActiveTeam } from '../../types/game';
-import { useAppDispatch } from '../../services/hooks/useState';
+import { useAppDispatch, useAppSelector } from '../../services/hooks/useState';
 import { addTeamsApi, deleteTeamsApi } from '../../services/store/game'
+import { UserInfo } from '../../types/user';
 
 interface IModal {
   isOpen: boolean
@@ -22,6 +23,8 @@ export function AddTeamModal(props: IModal) {
   const dispatch = useAppDispatch()
   let teamName = '';
   let playedTeams: Team[];
+  const user: UserInfo = useAppSelector(state => state.user.user);
+
   if (Array.isArray(props.playedTeams)) {
     playedTeams = props.playedTeams?.filter((playedTeam) => {
       return !props.activeTeams.some((activeTeam) => {
@@ -52,7 +55,8 @@ export function AddTeamModal(props: IModal) {
                   teamName: teamName,
                   games: 0,
                   words: 0,
-                  victories: 0
+                  victories: 0,
+                  player_id: user.id
                 }
                 props.onAddTeam(teamName)
                 dispatch(addTeamsApi(team))

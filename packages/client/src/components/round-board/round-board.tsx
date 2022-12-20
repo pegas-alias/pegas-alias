@@ -174,7 +174,8 @@ export const RoundBoard: React.FC = () => {
             "games": 1,
             "victories": (team.name == maxScoreTeam.name) ? 1 : 0,
             "team_id": 0,
-            "words": score
+            "words": score,
+            "player_id": 0
             }
           );
           

@@ -17,13 +17,12 @@ export async function createNewTeam(props: ITeam) {
 }
 
 // Обновление данных о команде
-export async function updateTeams (name:string, score:number, winner:string) {
+export async function updateTeams(name:string, score:number, winner:string) {
   const team = await Teams.findOne({
     where: { 
       teamName: name
     }
   })
-  console.log('server winner ', winner);
   if (!team) {
     return;
   }
@@ -47,23 +46,25 @@ export async function getTeamById(id: number) {
 
 // Получить все команды
 export async function getAllTeams(props: pager) {
-  const { offset, limit, player_id } = props;
+  const { offset, limit, ratingFieldName, player_id } = props;
   const id = (player_id) ? player_id : 0;
   return Teams.findAndCountAll({
     offset: offset || 0,
     limit: limit || 20,
-    order: [['teamName', 'DESC']],
+    order: [[ratingFieldName ? ratingFieldName : 'victories', 'DESC']],
     where: { player_id: id }
   })
 }
 
-// Получение списка ТОР 10 
+// Получение списка ТОР 20 
 export async function getLeaderBoard(props: pager) {
-  const { offset, limit, ratingFieldName } = props
+  const { offset, limit, ratingFieldName, player_id } = props
+  const id = (player_id) ? player_id : 0;
   return Teams.findAndCountAll({ 
     offset: offset || 0,
     limit: limit || 20,
     order: [[ratingFieldName ? ratingFieldName : 'victories', 'DESC']],
+    where: { player_id: id }
   })
 }
 

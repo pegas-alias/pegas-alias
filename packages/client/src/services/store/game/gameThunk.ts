@@ -6,8 +6,7 @@ import { Team } from '../../../types/leaders'
 export const getTeamsApi = createAsyncThunk(
   'games/getTeamsApi',
   async function (filter: FilterState) {
-    const player_id = 0; // state.player_id
-    const response = await getTeamsAPI(filter, player_id);
+    const response = await getTeamsAPI(filter);
     return response;
   }
 )
