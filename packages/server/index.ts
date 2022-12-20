@@ -44,9 +44,6 @@ export async function createServer(
   app.use('/api/comments', commentsRouter)
   app.use('/api/likes', likesRouter)
   app.use('/api/teams', teamsRouter)
-// import { startApp } from './app/config/db.config'
-// заполняем команды соперники для нового игрока добавить в апи сохранения нового игрока
-// startApp(player_id)
   app.use('/api/user', userRouter)
 
   let template:string;
@@ -170,7 +167,7 @@ export async function createServer(
 }
 
 createServer().then( () => {
-  createClientAndConnect().then(
-    dbConnect
+  createClientAndConnect().then( ()=> 
+    dbConnect()
   )
 })

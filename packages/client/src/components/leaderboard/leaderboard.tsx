@@ -53,8 +53,8 @@ export function Leaderboard() {
   }, [queryFilter, queryPage])
 
   useEffect(() => {
-    dispatch(getLeadersApi(filter))
-  }, [filter])  
+      dispatch(getLeadersApi({...filter, "player_id":user.id}))
+  }, [filter, user.id])  
 
   return (
     <div className='leaderboard'>

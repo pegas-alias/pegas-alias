@@ -4,7 +4,7 @@ import { startApp } from '../../app/config/db.config'
 
 // Создать пользователя
 export async function createUser(props: IUser) {
-  startApp
+  if (props && props.author_id > 0) { startApp(props.author_id) }
   return User.create({ ...props })
 }
 
