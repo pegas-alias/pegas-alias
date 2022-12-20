@@ -83,7 +83,7 @@ export async function dbConnect() {
   }
 }
 
-export function startApp(player_id:string) {
+export function startApp(player_id:number) {
   dbConnect().then(
     () => {
       Teams.create({

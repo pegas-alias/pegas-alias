@@ -28,7 +28,7 @@ export const SignUp: React.FC = (): JSX.Element => {
   
   const onSubmit = (data: Record<string, unknown>) => {
     registerUser(data).then(res => {
-      if (res.id > 0) {
+      if (res && res.id > 0) {
         dispatch(getUserApi())
         navigate('/')
       }
