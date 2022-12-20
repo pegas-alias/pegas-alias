@@ -1,11 +1,9 @@
 import { apiInstance } from './axios'
 
-export const registerUser = (data: Record<string, unknown>) => {
-  apiInstance
+export const registerUser = async (data: Record<string, unknown>) => {
+  return await apiInstance
     .post('/auth/signup', data)
-    .then(response => {
-      console.log(response)
-    })
+    .then(response => response.data)
     .catch(error => {
       console.log(error)
     })

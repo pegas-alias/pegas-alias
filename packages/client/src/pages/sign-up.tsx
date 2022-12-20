@@ -3,7 +3,9 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
 import { Intro, FormField, Button } from '../components'
+import { useAppDispatch } from '../services/hooks'
 import { registerUser } from '../services/http/login'
+import { getUserApi } from '../services/store/user'
 import { authorization, ErrorMessage, errorToString, pattern } from '../utils'
 
 import './../scss/form/form.scss'
@@ -22,9 +24,15 @@ export const SignUp: React.FC = (): JSX.Element => {
   passwordField.current = watch('password', '')
 
   const navigate = useNavigate()
-
+  const dispatch = useAppDispatch()
+  
   const onSubmit = (data: Record<string, unknown>) => {
-    registerUser(data)
+    registerUser(data).then(res => {
+      if (res.id > 0) {
+        dispatch(getUserApi())
+        navigate('/')
+      }
+    })
   }
 
   authorization();
