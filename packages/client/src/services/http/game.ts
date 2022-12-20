@@ -11,9 +11,9 @@ export const getPublicData = async (url: string) => {
     })
 }
 
-export const getTeamsAPI = (filter: FilterState, id:number) => {
+export const getTeamsAPI = (filter: FilterState) => {
   return serverInstance
-    .get('/api/teams', { params: {...filter, "id":id} })
+    .get('/api/teams', { params: filter })
     .then(response => response.data )
     .catch(error => {
       console.log(error)

@@ -73,9 +73,10 @@ Comments.hasMany(Comments, {foreignKey: 'bind_comment_id'})
 Comments.hasMany(Like, {foreignKey: 'comment_id'})
 
 export async function dbConnect() {
+  const isDropTable = false 
   try {
     await sequelize.authenticate()
-    await sequelize.sync({ force: true })
+    await sequelize.sync({ force: isDropTable })
     console.log('Connection has been established successfully')
   } catch (e) {
     console.error('Unable to connect to the database: ', e)

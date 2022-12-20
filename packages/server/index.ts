@@ -11,6 +11,7 @@ import * as https from 'https'
 import iconv from 'iconv-lite'
 // @ts-ignore
 import { render } from '../client/dist/ssr/entry-server.cjs'
+import { dbConnect } from './app/config/db.config'
 import topicsRouter from './app/routers/topicsRouter'
 import commentsRouter from './app/routers/commentsRouter'
 import likesRouter from './app/routers/likesRouter'
@@ -169,5 +170,7 @@ export async function createServer(
 }
 
 createServer().then( () => {
-  createClientAndConnect()
+  createClientAndConnect().then(
+    dbConnect
+  )
 })

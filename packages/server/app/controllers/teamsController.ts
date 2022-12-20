@@ -5,7 +5,7 @@ import * as teamFunctions from '../funcs/teamsFunctions'
 // Получить список команд
 export const getTeams = async (req: Request, res: Response) => {
   await processResult(() => {
-    return teamFunctions.getAllTeams({ ...req.body })
+    return teamFunctions.getAllTeams(req.query)
   }, res, 'Что-то пошло не так'); 
 }
 

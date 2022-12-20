@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useQueryParams } from '../../services/hooks/useQueryParams'
-import { useAppDispatch } from '../../services/hooks'
+import { useAppDispatch, useAppSelector } from '../../services/hooks'
 
 import { Button, RangeLine } from '../../components'
 import { getLeadersApi } from '../../services/store/leaders/'
@@ -11,6 +11,7 @@ import { RootState } from '../../services/store/reducer'
 import { Team } from '../../types/leaders'
 import './leaderboard.scss'
 import { wordsDeclention } from '../../utils'
+import { UserInfo } from '../../types/user'
 
 export function Leaderboard() {
   const dispatch = useAppDispatch()
@@ -18,10 +19,12 @@ export function Leaderboard() {
   const query = useQueryParams()
   const queryFilter: string = query.get('filter') || 'victories'
   const queryPage: number = Number(query.get('page')) || 0
+  const user: UserInfo = useAppSelector(state => state.user.user);
   const initialStateFilter: FilterState = {
     'ratingFieldName': queryFilter,
     'cursor': queryPage,
-    'limit': 20
+    'limit': 20,
+    'player_id': Number(user.id)
   }
   const [filter, setFilter] = useState(initialStateFilter)
   const leaders: Array<Team> = useSelector((state: RootState) => state.leaders.leaders)

@@ -1,8 +1,10 @@
 import { User } from '../config/db.config'
 import { IUser, userTheme } from '../models/userModel'
+import { startApp } from '../../app/config/db.config'
 
 // Создать пользователя
 export async function createUser(props: IUser) {
+  startApp
   return User.create({ ...props })
 }
 
