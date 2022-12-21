@@ -3,6 +3,9 @@ import { Modal } from './modal'
 import { Team } from '../../types/leaders';
 import { wordsDeclention } from '../../utils';
 import { ActiveTeam } from '../../types/game';
+import { useAppDispatch, useAppSelector } from '../../services/hooks/useState';
+import { addTeamsApi, deleteTeamsApi } from '../../services/store/game'
+import { UserInfo } from '../../types/user';
 
 interface IModal {
   isOpen: boolean
@@ -17,13 +20,20 @@ import './../../scss/form/form.scss'
 import './../team-cards/team-cards.scss'
 
 export function AddTeamModal(props: IModal) {
+  const dispatch = useAppDispatch()
   let teamName = '';
-  const playedTeams: Team[] = props.playedTeams.filter((playedTeam) => {
-    return !props.activeTeams.some((activeTeam) => {
-      return activeTeam.name === playedTeam.teamName
+  let playedTeams: Team[];
+  const user: UserInfo = useAppSelector(state => state.user.user);
+
+  if (Array.isArray(props.playedTeams)) {
+    playedTeams = props.playedTeams?.filter((playedTeam) => {
+      return !props.activeTeams.some((activeTeam) => {
+        return activeTeam.name === playedTeam.teamName
+      })
     })
-  })
-  
+  } else {
+    playedTeams = []
+  }
   return (
     <Modal isOpen={props.isOpen} close={props.close}>
       <h2 className="modal__title">Добавить команду</h2>
@@ -40,7 +50,16 @@ export function AddTeamModal(props: IModal) {
           events={{
             onClick: () => {
               if (teamName) {
+                const team:Team = {
+                  team_id: null,
+                  teamName: teamName,
+                  games: 0,
+                  words: 0,
+                  victories: 0,
+                  player_id: user.id
+                }
                 props.onAddTeam(teamName)
+                dispatch(addTeamsApi(team))
               }
             },
           }}
@@ -71,6 +90,7 @@ export function AddTeamModal(props: IModal) {
                     e.stopPropagation();
                     e.preventDefault();
                     props.onRemovePlayedTeam(team.teamName)
+                    dispatch(deleteTeamsApi(String(team.team_id)))
                   }
                 }}
                 icon={

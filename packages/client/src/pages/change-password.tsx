@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
 import { FormField, Button, Avatar, BackLink } from '../components'
-import { errorToString, pattern } from '../utils'
+import { authorization, errorToString, pattern } from '../utils'
 
 import './../scss/form/form.scss'
 import { changePasswordAPI } from '../services/http/profile'
@@ -20,7 +20,9 @@ export const ChangePassword: React.FC = (): JSX.Element => {
     watch,
     formState: { errors },
     handleSubmit,
-  } = useForm({ mode: 'onBlur' })
+  } = useForm<Record<string, string>>({ 
+    mode: 'onBlur'
+  })
 
   const passwordField = useRef({})
   passwordField.current = watch('newPassword', '')
@@ -35,6 +37,7 @@ export const ChangePassword: React.FC = (): JSX.Element => {
     navigate('/profile')
   }
 
+  authorization();
   return (
     <>
       <header>

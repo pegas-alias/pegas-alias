@@ -11,7 +11,7 @@ export const createNewLike = async (req: Request, res: Response) => {
       comment_id: Number(comment_id),
       topic_id: Number(topic_id)
     })
-  }, res, 'Что-то пошло не так');
+  }, res, 'Что-то пошло не так')
 }
 
 // Удалить комментарий
@@ -19,5 +19,5 @@ export const deleteLikeById = async (req: Request, res: Response) => {
   const { id } = req.params
   await processResult(() => {
     return likesFunctions.deleteLike(Number(id))
-  }, res, 'Что-то пошло не так');
+  }, res, 'Что-то пошло не так')
 }

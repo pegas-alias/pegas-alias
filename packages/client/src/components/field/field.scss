@@ -30,3 +30,9 @@
     font-weight: 400;
   }
 }
+
+@include down($mobile) {
+  .field {
+    padding: 12px 20px;
+  }
+}

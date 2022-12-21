@@ -7,7 +7,6 @@ import { UserInfo } from '../../types/user'
 import { IComment } from '../../services/store/topic/type'
 import { createLikeApi, deleteCommentApi, deleteLikeApi, getTopicApi } from '../../services/store/topic'
 import { useQueryParams } from '../../services/hooks/useQueryParams'
-import { createNewLike } from '../../services/http/topic'
 
 export function Comment(props: IComment) {
   const [commentOpen, toggleField] = useToggle()
@@ -16,6 +15,7 @@ export function Comment(props: IComment) {
   const user: UserInfo = useAppSelector(state => state.user.user)
   const dispatch = useAppDispatch()
   const haveLike = props.Likes.find(item => item.author_id === user.id)
+  const createDate = () => getDateDMY(props.createdAt)
   const deleteComment = (id:number) => {
     dispatch(deleteCommentApi(id)).then(
       () => {
@@ -51,7 +51,7 @@ export function Comment(props: IComment) {
     <div className="comment">
       <div className="comment__header">
         <span className="comment__author">{props.author_name}</span>
-        <span className="comment__date">{getDateDMY(props.createdAt)}</span>
+        <span className="comment__date">{createDate()}</span>
       </div>
       <div className="comment__body">
         <p className="comment__text">{props.message}</p>
@@ -94,9 +94,9 @@ export function Comment(props: IComment) {
           </div>
         </div>
 
-        {props.Comments && (
+        {props?.Comments && (
           <div className="comment__replies">
-            {props.Comments.map(comment => {
+            {props?.Comments.map(comment => {
               return <Comment {...comment} key={comment.comment_id} />
             })}
           </div>

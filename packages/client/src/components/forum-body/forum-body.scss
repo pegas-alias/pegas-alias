@@ -1,4 +1,5 @@
 @import './../../scss/base/variables';
+@import './../../scss/base/mixins';
 
 .forum-body {
   width: 800px;
@@ -22,4 +23,10 @@
   justify-content: space-between;
   font-size: 16px;
   font-weight: 700;
+}
+
+@include down($mobile) {
+  .forum-body__footer {
+    font-size: 12px;
+  }
 }

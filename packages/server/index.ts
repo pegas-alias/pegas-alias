@@ -3,7 +3,6 @@ import path from 'node:path'
 import cors from 'cors'
 import bodyParser from 'body-parser'
 import express from 'express'
-import { startApp } from './app/config/db.config'
 import { createClientAndConnect } from './db'
 // импортируем работу с запросами для сервера
 import * as http from 'http'
@@ -12,9 +11,12 @@ import * as https from 'https'
 import iconv from 'iconv-lite'
 // @ts-ignore
 import { render } from '../client/dist/ssr/entry-server.cjs'
+import { dbConnect } from './app/config/db.config'
 import topicsRouter from './app/routers/topicsRouter'
 import commentsRouter from './app/routers/commentsRouter'
 import likesRouter from './app/routers/likesRouter'
+import teamsRouter from './app/routers/teamsRouter'
+import userRouter from './app/routers/userRouter'
 
 
 function escapeHtml(string: string): string {
@@ -41,6 +43,8 @@ export async function createServer(
   app.use('/api/topics', topicsRouter)
   app.use('/api/comments', commentsRouter)
   app.use('/api/likes', likesRouter)
+  app.use('/api/teams', teamsRouter)
+  app.use('/api/user', userRouter)
 
   let template:string;
 
@@ -131,14 +135,27 @@ export async function createServer(
     }
   });
 
-  app.use('/', express.static('../client/dist/client/'))
+  app.use('/', express.static('../client/dist/ssr'))
   
   app.get('/*', async (req, res) => {
-    const result = render(req.originalUrl)
-    template = fs.readFileSync(resolve('../client/dist/client/index.html'), 'utf-8')
-    template = await vite.transformIndexHtml(req.originalUrl, template)
-    const html = template.replace(`<div id="root"></div>`,`<div id="root">${result}</div>`)
-    res.status(200).set({ 'Content-Type': 'text/html' }).send(html)
+    const result = render(req.originalUrl);
+    const clientSrc = '../client/dist/client/';
+    const ssrSrc = '../client/dist/ssr/';
+    
+    template = fs.readFileSync(resolve(clientSrc + 'index.html'), 'utf-8');
+    if (fs.existsSync(clientSrc) && !fs.existsSync(ssrSrc + 'assets')) {
+      fs.cpSync(clientSrc + 'assets', ssrSrc + 'assets', { recursive: true });
+      fs.readdir(clientSrc, function(err, files) {
+        files.filter(el => path.extname(el) === '.js').forEach((file) => {
+          fs.cp(clientSrc + file, ssrSrc + file, (error) => {
+            if (error) console.error(error)
+          })
+        });
+      })
+    }
+    template = await vite.transformIndexHtml(req.originalUrl, template);
+    const html = template.replace(`<div id="root"></div>`,`<div id="root">${result}</div>`);
+    res.status(200).set({ 'Content-Type': 'text/html' }).send(html);
   })
   
   app.listen(port, () => {
@@ -146,8 +163,11 @@ export async function createServer(
   })
 
   return { app, vite };
+
 }
 
 createServer().then( () => {
-  createClientAndConnect().then(() => startApp())
+  createClientAndConnect().then(
+    dbConnect
+  )
 })

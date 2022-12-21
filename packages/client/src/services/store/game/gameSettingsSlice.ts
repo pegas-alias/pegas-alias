@@ -3,42 +3,12 @@ import { ActiveTeam, GameSettings} from '../../../types/game';
 import { Team } from '../../../types/leaders';
 import { deleteByValue } from '../../../utils/deleteFromArrayByValue';
 import { WritableDraft } from "immer/dist/internal";
+import { getTeamsApi, addTeamsApi, deleteTeamsApi } from './gameThunk';
 
-// TODO: В playedTeams подставить игравшие команды из реальной статистики
 const initialState: GameSettings = {
   activeTeams: [],
-  playedTeams: [
-    {
-      teamName: 'Девочки',
-      games: 15,
-      victories: 15,
-      words: 9605,
-    },
-    {
-      teamName: 'Мудрые черепахи',
-      games: 120,
-      victories: 10,
-      words: 1,
-    },
-    {
-      teamName: 'Веселые бизончики',
-      games: 6,
-      victories: 5,
-      words: 15,
-    },
-    {
-      teamName: 'Настольные монстры',
-      games: 3000,
-      victories: 200,
-      words: 56,
-    },
-    {
-      teamName: 'Киноманы',
-      games: 2,
-      victories: 0,
-      words: 2,
-    },
-  ],
+  playedTeams: [],
+  status: '',
   roundDuration: 60,
   wordsToWin: 50,
   lastWordForAll: true,
@@ -110,8 +80,24 @@ const gameSettingsSlice = createSlice({
     clearGameSettings(state) {
       state.activeTeams = [];
       state.dictionary = null;
-    }
+    },
   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getTeamsApi.pending, (state) => {
+        state.status = 'loading'
+      })
+      .addCase(getTeamsApi.fulfilled, (state, action) => {
+        state.status = 'resolved'
+        state.playedTeams = action.payload.rows
+      })
+      .addCase(addTeamsApi.fulfilled, (state) => {
+        state.status = 'updated'
+      })
+      .addCase(deleteTeamsApi.fulfilled, (state) => {
+        state.status = 'updated'
+      })
+  }
 })
 
 export const {

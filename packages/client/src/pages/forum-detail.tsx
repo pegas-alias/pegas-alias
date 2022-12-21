@@ -7,6 +7,7 @@ import { getTopicApi } from '../services/store/topic'
 import { useSelector } from 'react-redux'
 import { RootState } from '../services/store/reducer'
 import { ITopic } from '../services/store/topic/type'
+import { authorization } from '../utils'
 
 
 export const ForumDetail: React.FC = (): JSX.Element => {
@@ -17,6 +18,8 @@ export const ForumDetail: React.FC = (): JSX.Element => {
   useEffect(() => {
       dispatch(getTopicApi(topicId))
   }, [topicId])
+
+  authorization();
   return (
     <>
       <header>
@@ -25,13 +28,14 @@ export const ForumDetail: React.FC = (): JSX.Element => {
       <main className="forum">
         <div className="forum__body">
           <ForumBody {...topic} />
-          <div className="forum__comments">
-            {topic.Comments && 
-              topic.Comments.map(comment => { if (!comment.bind_comment_id) {
-                return <Comment {...comment} key={comment.comment_id} />
-              }                
-            })}
-          </div>
+          {topic.Comments && topic.Comments.length 
+            ? <div className="forum__comments">
+                {topic.Comments.map(comment => { if (!comment.bind_comment_id) {
+                  return <Comment {...comment} key={comment.comment_id} />
+                }})}
+              </div>
+            : ''
+          }
           <div className="forum__footer">
             <CommentField />
           </div>
